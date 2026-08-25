@@ -1,0 +1,37 @@
+# Flux Entertainment — Wix to Astro/Cloudflare redirect map
+# All 301s (permanent) so Google transfers ranking to the new URLs
+
+# Homepage
+/home / 301
+
+# Entertainment service pages — same slug as before, no redirect needed
+# (pyrotechnics-performers, fire-shows-acts, angle-grinding-performers,
+#  led-pixel-shows, customised-productions all kept their exact old URL)
+
+# Renamed slug
+/whip-cracking-1 /whip-cracking 301
+
+# Cut services — send to homepage rather than a dead end
+/roving-performers / 301
+/aerial-acts / 301
+
+# Renamed pages
+/bio /about 301
+/contact-us /contact 301
+
+# Blog (retired, no replacement)
+/blog / 301
+
+# Shop (retired, no replacement) — wildcard covers every product page
+/product-page/* / 301
+
+# SFX services — moved to the sister site
+# NOTE: destination assumes fluxsfx.com.au's services page is at /services — confirm this before going live
+/cold-spark-effects https://www.fluxsfx.com.au/services 301
+/flame-projection https://www.fluxsfx.com.au/services 301
+/copy-of-flame-projection https://www.fluxsfx.com.au/services 301
+/fog-effects https://www.fluxsfx.com.au/services 301
+/copy-of-fog-effects https://www.fluxsfx.com.au/services 301
+/copy-of-c02-effects https://www.fluxsfx.com.au/services 301
+/close-proximity-fireworks https://www.fluxsfx.com.au/services 301
+/copy-of-close-proximity-fireworks https://www.fluxsfx.com.au/services 301
