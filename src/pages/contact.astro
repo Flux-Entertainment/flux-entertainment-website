@@ -240,4 +240,38 @@ const description = "Get in touch with Flux Entertainment to book fire, pyrotech
   </section>
 
 </main>
+
+<script>
+  const form = document.getElementById('enquiryForm');
+  const status = document.getElementById('formStatus');
+  const btn = document.getElementById('submitBtn');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    status.textContent = '';
+    status.className = 'form-status';
+    try {
+      const data = new FormData(form);
+      const res = await fetch('https://formspree.io/f/xjybdqzo', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        status.textContent = "Thanks — your enquiry's been sent. We'll be in touch soon.";
+        status.classList.add('success');
+        form.reset();
+      } else {
+        status.textContent = "Something went wrong — please try again or email us directly.";
+        status.classList.add('error');
+      }
+    } catch (err) {
+      status.textContent = "Something went wrong — please try again or email us directly.";
+      status.classList.add('error');
+    }
+    btn.disabled = false;
+    btn.textContent = 'Send Enquiry';
+  });
+</script>
 </Layout>

@@ -210,4 +210,43 @@ const description = "Fully bespoke productions from Flux Entertainment, combinin
   </section>
 
 </main>
+
+<script>
+  (function(){
+    var box = document.getElementById('customShowreelBox');
+    var placeholder = document.getElementById('customShowreelPlaceholder');
+    var unmuteBtn = document.getElementById('customUnmuteBtn');
+    if (!box) return;
+    var loaded = false;
+    var iframe = null;
+
+    function loadPlayer(){
+      if (loaded) return;
+      loaded = true;
+      iframe = document.createElement('iframe');
+      iframe.id = 'customShowreelIframe';
+      iframe.src = 'https://www.youtube.com/embed/AOsidJRkQEI?autoplay=1&mute=1&loop=1&playlist=AOsidJRkQEI&enablejsapi=1&rel=0';
+      iframe.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; border:0;';
+      iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      placeholder.remove();
+      box.appendChild(iframe);
+      unmuteBtn.style.display = 'inline-block';
+    }
+
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) loadPlayer();
+      });
+    }, { threshold: 0.4 });
+    observer.observe(box);
+
+    unmuteBtn.addEventListener('click', function(){
+      if (!iframe) return;
+      iframe.contentWindow.postMessage(JSON.stringify({event:'command', func:'unMute', args:[]}), '*');
+      iframe.contentWindow.postMessage(JSON.stringify({event:'command', func:'setVolume', args:[100]}), '*');
+      unmuteBtn.textContent = 'Sound On';
+    });
+  })();
+</script>
 </Layout>
