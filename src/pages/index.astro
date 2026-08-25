@@ -290,6 +290,7 @@ const description = "Australia's leading fire & pyrotechnics performance company
   /* ---------- WHAT WE PROVIDE ---------- */
   .provide{
     position:relative;
+    overflow:hidden;
     background:
       linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(10,9,8,0.85) 55%, var(--void) 100%),
       url("/images/b13fb03a0be64824.jpg");
@@ -313,6 +314,7 @@ const description = "Australia's leading fire & pyrotechnics performance company
   /* ---------- SERVICES ---------- */
   .services{
     position:relative;
+    overflow:hidden;
     background:
       linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(23,19,16,0.9) 60%, var(--char) 100%),
       url("/images/70ef51cefa2977a4.jpg");
@@ -344,7 +346,7 @@ const description = "Australia's leading fire & pyrotechnics performance company
   .service-row:hover .service-arrow{transform:translateX(6px); color:var(--gold);}
 
   /* ---------- ABOUT TEASER ---------- */
-  .about{background:var(--void);}
+  .about{background:var(--void); overflow:hidden;}
   .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; position:relative; z-index:2;}
   .about-copy p{color:var(--ash); margin-bottom:20px; font-size:1.02rem;}
   .about-stats{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#241E1A; margin-top:36px;}
