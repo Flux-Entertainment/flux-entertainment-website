@@ -1,0 +1,751 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = "Flux Entertainment | Pyrotechnics & Fire Performers Australia";
+const description = "Australia's leading fire & pyrotechnics performance company. Firework-dancing, fire shows, angle grinding, LED, whip cracking & custom productions — nationally licensed, Australia wide.";
+---
+<Layout title={title} description={description}>
+  <Fragment slot="page-style">
+<style>
+  :root{
+    --void:#0A0908;
+    --char:#161210;
+    --char-2:#1F1916;
+    --flame:#D62828;
+    --flame-dim:#8C1A1A;
+    --ember:#F77F00;
+    --gold:#FCBF49;
+    --bone:#F4EDE4;
+    --ash:#A89A8C;
+    --ash-dim:#6E645A;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--bone);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.95;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    font-size:0.72rem;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 28px;}
+
+  /* watermark motif */
+  .mark-bg{
+    position:absolute;
+    width:900px; height:900px;
+    background: radial-gradient(circle at center, rgba(214,40,40,0.10) 0%, rgba(214,40,40,0) 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:linear-gradient(to bottom, rgba(10,9,8,0.92), rgba(10,9,8,0));
+    padding:18px 0;
+    transition: background 0.3s ease;
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .logo-mark{height:78px;}
+  nav{display:flex; align-items:center; gap:34px;}
+  .ig-link{display:flex; align-items:center; gap:8px; color:var(--ash) !important;}
+  .ig-link svg{width:16px; height:16px;}
+  .ig-link:hover{color:var(--gold) !important;}
+  nav a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ash);
+    transition:color 0.2s ease;
+    position:relative;
+  }
+  nav a:hover{color:var(--bone);}
+  .nav-cta{
+    border:1px solid var(--flame);
+    color:var(--bone) !important;
+    padding:11px 22px;
+    background:linear-gradient(120deg, var(--flame), var(--flame-dim));
+  }
+  .nav-toggle{display:none;}
+
+  .has-dropdown{position:relative;}
+  .dropdown-trigger{display:flex; align-items:center; gap:6px; cursor:pointer;}
+  .dropdown-trigger svg{width:10px; height:10px; transition:transform 0.2s ease;}
+  .has-dropdown:hover .dropdown-trigger svg{transform:rotate(180deg);}
+  .dropdown-menu{
+    position:absolute; top:calc(100% + 18px); left:50%; transform:translateX(-50%);
+    background:var(--char); border:1px solid #2A231F;
+    min-width:240px; padding:10px 0;
+    opacity:0; visibility:hidden; transform:translateX(-50%) translateY(6px);
+    transition:opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index:10;
+  }
+  .has-dropdown:hover .dropdown-menu{
+    opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);
+  }
+  .dropdown-menu a{
+    display:block; padding:11px 22px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ash);
+    border-bottom:1px solid #201A17;
+  }
+  .dropdown-menu a:last-child{border-bottom:none;}
+  .dropdown-menu a:hover{color:var(--gold); background:rgba(214,40,40,0.06);}
+  @media (max-width:860px){
+    .dropdown-menu{
+      position:static; opacity:1; visibility:visible; transform:none;
+      background:none; border:none; padding:6px 0 6px 16px; min-width:0;
+      display:none;
+    }
+    .has-dropdown.mobile-open .dropdown-menu{display:block;}
+    .dropdown-menu a{padding:10px 0; border:none; color:var(--ash-dim);}
+    .dropdown-trigger svg{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:120px;
+    overflow:hidden;
+    background:var(--void);
+  }
+  .hero-video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(to top, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.55) 40%, rgba(10,9,8,0.35) 100%),
+      radial-gradient(ellipse 70% 60% at 25% 25%, rgba(140,26,26,0.35) 0%, rgba(10,9,8,0) 65%);
+  }
+  .hero .mark-bg{ top:-200px; right:-250px; width:1100px; height:1100px; opacity:0.35; z-index:1;}
+  .hero-grain{
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:1;
+  }
+  .ember{
+    position:absolute;
+    bottom:-10px;
+    width:5px; height:5px;
+    border-radius:50%;
+    background:var(--ember);
+    box-shadow:0 0 10px 2px var(--ember);
+    animation: rise linear infinite;
+    opacity:0.8;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0.9;}
+    90%{opacity:0.5;}
+    100%{ transform:translateY(-100vh) translateX(20px); opacity:0;}
+  }
+  .hero-inner{position:relative; z-index:2; width:100%;}
+  .eyebrow-row{display:flex; align-items:center; gap:14px; margin-bottom:28px;}
+  .eyebrow-row .line{width:40px; height:1px; background:var(--flame);}
+  .eyebrow{color:var(--gold);}
+  .hero h1{
+    font-size:clamp(3rem, 8vw, 7.2rem);
+    max-width:1000px;
+    color:var(--bone);
+  }
+  .hero h1 .accent{
+    background:linear-gradient(100deg, var(--flame) 10%, var(--ember) 50%, var(--gold) 90%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero-sub{
+    max-width:560px;
+    margin-top:28px;
+    color:var(--ash);
+    font-size:1.05rem;
+  }
+  .hero-actions{display:flex; gap:18px; margin-top:44px; flex-wrap:wrap;}
+  .btn-primary{
+    background:linear-gradient(120deg, var(--flame), var(--flame-dim));
+    color:var(--bone);
+    padding:17px 34px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    border:1px solid var(--flame);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 30px -10px rgba(214,40,40,0.6);}
+  .btn-ghost{
+    color:var(--bone);
+    padding:17px 26px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    border:1px solid var(--ash-dim);
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
+
+  .scroll-cue{
+    position:absolute; bottom:38px; left:28px;
+    display:flex; align-items:center; gap:12px;
+    color:var(--ash-dim);
+    z-index:2;
+  }
+  .scroll-cue .stick{width:1px; height:44px; background:linear-gradient(to bottom, var(--flame), transparent);}
+
+  /* ---------- TRUST MARQUEE ---------- */
+  .trust{
+    border-top:1px solid #241E1A;
+    border-bottom:1px solid #241E1A;
+    padding:26px 0;
+    background:var(--char);
+    overflow:hidden;
+    position:relative;
+  }
+  .trust-label{
+    position:absolute; left:28px; top:50%; transform:translateY(-50%);
+    background:var(--char);
+    padding-right:20px;
+    color:var(--ash-dim);
+    z-index:2;
+  }
+  .marquee-track{
+    display:flex;
+    gap:64px;
+    white-space:nowrap;
+    animation: scroll 38s linear infinite;
+    padding-left:220px;
+  }
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  .marquee-track span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    color:var(--ash);
+    text-transform:uppercase;
+  }
+  .logo-box{
+    height:56px;
+    width:150px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:4px;
+  }
+  .logo-box img{
+    display:block;
+    max-height:100%;
+    max-width:100%;
+    width:auto;
+    height:auto;
+    margin:auto;
+    object-fit:contain;
+    opacity:0.6;
+    filter:brightness(0) invert(1);
+    transition:opacity 0.25s ease;
+  }
+  .logo-box:hover img{opacity:1;}
+  .venue-row{
+    display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+    padding-left:220px;
+  }
+  @media (max-width:860px){
+    .trust-label{position:static; display:block; padding:0 28px 14px;}
+    .venue-row, .marquee-track{padding-left:28px;}
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{position:relative; padding:130px 0;}
+  .section-head{max-width:640px; margin-bottom:70px; position:relative; z-index:2;}
+  .section-head h2{font-size:clamp(2.4rem, 5vw, 4rem); color:var(--bone);}
+  .section-head p{color:var(--ash); margin-top:18px; font-size:1.05rem;}
+
+  /* ---------- WHAT WE PROVIDE ---------- */
+  .provide{
+    position:relative;
+    background:
+      linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(10,9,8,0.85) 55%, var(--void) 100%),
+      url("/images/b13fb03a0be64824.jpg");
+    background-size:cover;
+    background-position:bottom center;
+    background-repeat:no-repeat;
+  }
+  .tag-cloud{display:flex; flex-wrap:wrap; gap:14px; position:relative; z-index:2;}
+  .tag-cloud span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:12px 20px;
+    border:1px solid #2A231F;
+    color:var(--ash);
+    transition:all 0.25s ease;
+  }
+  .tag-cloud span:hover{border-color:var(--flame); color:var(--gold); background:rgba(214,40,40,0.06);}
+
+  /* ---------- SERVICES ---------- */
+  .services{
+    position:relative;
+    background:
+      linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(23,19,16,0.9) 60%, var(--char) 100%),
+      url("/images/70ef51cefa2977a4.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  .services .mark-bg{ bottom:-300px; left:-250px; opacity:0.4;}
+  .service-list{position:relative; z-index:2;}
+  .service-row{
+    display:grid;
+    grid-template-columns:1fr 240px 28px;
+    align-items:center;
+    gap:26px;
+    padding:30px 0;
+    border-top:1px solid #29221E;
+    transition:background 0.25s ease, padding-left 0.25s ease;
+  }
+  .service-row:last-child{border-bottom:1px solid #29221E;}
+  .service-row:hover{background:rgba(214,40,40,0.05); padding-left:14px;}
+  .service-name{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(1.3rem, 3vw, 2rem);
+    text-transform:uppercase;
+    color:var(--bone);
+  }
+  .service-desc{color:var(--ash-dim); font-size:0.88rem; line-height:1.5;}
+  .service-arrow{color:var(--ash-dim); transition:transform 0.25s ease, color 0.25s ease;}
+  .service-row:hover .service-arrow{transform:translateX(6px); color:var(--gold);}
+
+  /* ---------- ABOUT TEASER ---------- */
+  .about{background:var(--void);}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; position:relative; z-index:2;}
+  .about-copy p{color:var(--ash); margin-bottom:20px; font-size:1.02rem;}
+  .about-stats{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#241E1A; margin-top:36px;}
+  .stat{background:var(--void); padding:26px 22px;}
+  .stat .num{font-family:'Anton', sans-serif; font-size:2.2rem; color:var(--gold);}
+  .stat .lbl{font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ash-dim); margin-top:6px;}
+  .about-visual{
+    aspect-ratio:4/5;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(214,40,40,0.4), transparent 60%),
+      linear-gradient(160deg, #1F1916, #0A0908);
+    border:1px solid #2A231F;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .about-visual .mark-mono{width:55%; opacity:0.9; filter: drop-shadow(0 0 40px rgba(214,40,40,0.5));}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{background:var(--char);}
+  .test-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:#29221E; position:relative; z-index:2;}
+  .test-card{background:var(--char); padding:44px;}
+  .test-card p{font-family:'Anton', sans-serif; font-weight:400; text-transform:none; letter-spacing:0; font-size:1.3rem; line-height:1.3; color:var(--bone);}
+  .test-card .who{margin-top:20px; color:var(--gold); font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;}
+
+  /* ---------- CTA / CONTACT ---------- */
+  .cta{
+    background:
+      linear-gradient(140deg, rgba(140,26,26,0.55), rgba(10,9,8,0.88) 65%),
+      url("/images/46e12eaf360e6610.jpg");
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+  }
+  .cta .mark-bg{top:-300px; left:50%; transform:translateX(-50%); width:1300px; height:1300px; opacity:0.6;}
+  .cta-inner{position:relative; z-index:2;}
+  .cta h2{font-size:clamp(2.6rem, 7vw, 5.5rem); color:var(--bone);}
+  .cta p{color:rgba(244,237,228,0.75); max-width:520px; margin:22px auto 0; font-size:1.05rem;}
+  .cta-actions{display:flex; gap:18px; justify-content:center; margin-top:44px; flex-wrap:wrap;}
+  .cta .btn-ghost{border-color:rgba(244,237,228,0.35);}
+  .cta .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
+  .contact-strip{
+    display:flex; justify-content:center; gap:50px; margin-top:60px;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:rgba(244,237,228,0.6);
+  }
+  .contact-strip a{color:var(--bone); border-bottom:1px solid rgba(244,237,228,0.3);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--void); padding:60px 0 34px; border-top:1px solid #201A17;}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; gap:40px; flex-wrap:wrap; padding-bottom:40px;}
+  .footer-logo{height:58px; margin-bottom:16px;}
+  .footer-tag{color:var(--ash-dim); font-size:0.9rem; max-width:280px;}
+  .footer-cols{display:flex; gap:70px; flex-wrap:wrap;}
+  .footer-col .mono{color:var(--ash-dim); margin-bottom:16px; display:block;}
+  .footer-col a{display:block; color:var(--ash); font-size:0.88rem; margin-bottom:10px; transition:color 0.2s ease;}
+  .footer-col a:hover{color:var(--gold);}
+  .sister-band{
+    background:var(--char);
+    border-top:1px solid #241E1A;
+    border-bottom:1px solid #241E1A;
+  }
+  .sister-band a{
+    display:flex; align-items:center; justify-content:center; gap:28px;
+    padding:36px 28px;
+    flex-wrap:wrap;
+    text-align:center;
+    transition:background 0.25s ease;
+  }
+  .sister-band a:hover{background:rgba(214,40,40,0.06);}
+  .sister-band .sfx-logo{
+    height:56px;
+    width:auto;
+  }
+  .sister-band .sister-copy{color:var(--ash); font-size:1rem;}
+  .sister-band .sister-copy strong{color:var(--bone);}
+  .footer-bottom{
+    border-top:1px solid #201A17; padding-top:26px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    color:var(--ash-dim); font-size:0.78rem;
+  }
+
+  @media (max-width: 860px){
+    nav{
+      position:fixed; top:0; right:-100%; height:100vh; width:78%;
+      background:var(--char); flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:0 40px; transition:right 0.3s ease; gap:26px;
+    }
+    nav.open{right:0;}
+    .nav-toggle{display:block; z-index:60; background:none; border:none; color:var(--bone); font-size:1.6rem;}
+    .about-grid{grid-template-columns:1fr;}
+    .test-grid{grid-template-columns:1fr;}
+    .service-row{grid-template-columns:1fr 26px; }
+    .service-desc{display:none;}
+    section{padding:80px 0;}
+  }
+</style>
+  </Fragment>
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="" aria-label="Flux Entertainment fire and pyrotechnics performance showreel">
+      <source src="https://videos.fluxentertainment.com.au/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="mark-bg"></div>
+    <div class="hero-grain" style="z-index:1;"></div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow-row">
+        <span class="line"></span>
+        <span class="mono eyebrow">Fire &amp; Pyrotechnic Performers — Australia Wide</span>
+      </div>
+      <h1>Australia's Most<br><span class="accent">High-Impact</span> Shows</h1>
+      <p class="hero-sub">Handheld pyrotechnics, high-energy fire shows, and specialty acts — choreographed for stadiums, stages, and private events across the country. The only nationally licensed team performing at this scale.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book Your Event</a>
+        <a href="#services" class="btn-ghost">See What We Do</a>
+      </div>
+    </div>
+    <div class="scroll-cue">
+      <div class="stick"></div>
+      <span class="mono">Scroll</span>
+    </div>
+  </section>
+
+  <!-- CLAIM BAR -->
+  <div class="claim-bar" style="background:var(--void); padding:44px 0; border-top:1px solid #201A17; border-bottom:1px solid #201A17;">
+    <div class="wrap" style="text-align:center;">
+      <p class="display" style="font-size:clamp(1.1rem, 2.6vw, 1.7rem); color:var(--bone); letter-spacing:0.01em; text-transform:none;">
+        The only shows of this scale in the <span style="color:var(--gold);">Southern Hemisphere &amp; Asia-Pacific</span> region.
+      </p>
+    </div>
+  </div>
+
+  <!-- TRUST MARQUEE -->
+  <div class="trust">
+    <div class="trust-label mono">Clients</div>
+    <div class="marquee-track">
+      <div class="logo-box client"><img src="/images/057c0d093231835b.png" alt="ACT Government logo"></div>
+      <div class="logo-box client"><img src="/images/2781323574911132.png" alt="Brisbane Heat logo"></div>
+      <div class="logo-box client"><img src="/images/7e444706e9fd936d.png" alt="Royal Queensland Exhibition (Ekka) logo"></div>
+      <div class="logo-box client"><img src="/images/94af0f4b50393493.png" alt="Fireball Whisky logo"></div>
+      <div class="logo-box client"><img src="/images/023c8da67db3aae7.png" alt="Channel 7 logo"></div>
+      <div class="logo-box client"><img src="/images/c1c77889d27166d4.png" alt="Fox Sports logo"></div>
+      <div class="logo-box client"><img src="/images/aad8c04c03f5d889.png" alt="Fremantle logo"></div>
+      <div class="logo-box client"><img src="/images/f4e823ed10d5037c.png" alt="Hancock Prospecting logo"></div>
+      <div class="logo-box client"><img src="/images/d703f20d36cfb81f.png" alt="Hungry Jack's logo"></div>
+      <div class="logo-box client"><img src="/images/7dd2874bad0a1fb3.png" alt="Lenovo logo"></div>
+      <div class="logo-box client"><img src="/images/87ab8b663337bae0.png" alt="National Basketball League logo"></div>
+      <div class="logo-box client"><img src="/images/0f97e57c499f7e9b.png" alt="Outback Queensland logo"></div>
+      <div class="logo-box client"><img src="/images/4d2859ac3fe7e12c.png" alt="Australian Tattoo Expo logo"></div>
+      <div class="logo-box client"><img src="/images/7283b8dbad3373d9.png" alt="V8 Supercars logo"></div>
+      <div class="logo-box client"><img src="/images/ae8b5ff6752be453.png" alt="Mitre 10 logo"></div>
+      <div class="logo-box client"><img src="/images/2d6a6980ad8d3164.png" alt="Paniyiri Greek Festival logo"></div>
+      <div class="logo-box client"><img src="/images/8b2fef91b4defd40.png" alt="Toyota logo"></div>
+      <div class="logo-box client"><img src="/images/714c7fb29e58d496.png" alt="Sony logo"></div>
+      <div class="logo-box client"><img src="/images/6cfccd44252db448.png" alt="Sovereign Hill logo"></div>
+      <div class="logo-box client"><img src="/images/25aef8b2bfb63d2f.png" alt="Warner Bros. Movie World logo"></div>
+      <div class="logo-box client"><img src="/images/c4a2ad5d8588563f.png" alt="Village Roadshow Theme Parks logo"></div>
+      <div class="logo-box client"><img src="/images/057c0d093231835b.png" alt="ACT Government logo"></div>
+      <div class="logo-box client"><img src="/images/2781323574911132.png" alt="Brisbane Heat logo"></div>
+      <div class="logo-box client"><img src="/images/7e444706e9fd936d.png" alt="Royal Queensland Exhibition (Ekka) logo"></div>
+      <div class="logo-box client"><img src="/images/94af0f4b50393493.png" alt="Fireball Whisky logo"></div>
+      <div class="logo-box client"><img src="/images/023c8da67db3aae7.png" alt="Channel 7 logo"></div>
+      <div class="logo-box client"><img src="/images/c1c77889d27166d4.png" alt="Fox Sports logo"></div>
+      <div class="logo-box client"><img src="/images/aad8c04c03f5d889.png" alt="Fremantle logo"></div>
+      <div class="logo-box client"><img src="/images/f4e823ed10d5037c.png" alt="Hancock Prospecting logo"></div>
+      <div class="logo-box client"><img src="/images/d703f20d36cfb81f.png" alt="Hungry Jack's logo"></div>
+      <div class="logo-box client"><img src="/images/7dd2874bad0a1fb3.png" alt="Lenovo logo"></div>
+      <div class="logo-box client"><img src="/images/87ab8b663337bae0.png" alt="National Basketball League logo"></div>
+      <div class="logo-box client"><img src="/images/0f97e57c499f7e9b.png" alt="Outback Queensland logo"></div>
+      <div class="logo-box client"><img src="/images/4d2859ac3fe7e12c.png" alt="Australian Tattoo Expo logo"></div>
+      <div class="logo-box client"><img src="/images/7283b8dbad3373d9.png" alt="V8 Supercars logo"></div>
+      <div class="logo-box client"><img src="/images/ae8b5ff6752be453.png" alt="Mitre 10 logo"></div>
+      <div class="logo-box client"><img src="/images/2d6a6980ad8d3164.png" alt="Paniyiri Greek Festival logo"></div>
+      <div class="logo-box client"><img src="/images/8b2fef91b4defd40.png" alt="Toyota logo"></div>
+      <div class="logo-box client"><img src="/images/714c7fb29e58d496.png" alt="Sony logo"></div>
+      <div class="logo-box client"><img src="/images/6cfccd44252db448.png" alt="Sovereign Hill logo"></div>
+      <div class="logo-box client"><img src="/images/25aef8b2bfb63d2f.png" alt="Warner Bros. Movie World logo"></div>
+      <div class="logo-box client"><img src="/images/c4a2ad5d8588563f.png" alt="Village Roadshow Theme Parks logo"></div>
+    </div>
+  </div>
+  <!-- SHOWREEL -->
+  <section class="showreel" style="background:var(--char); padding-top:110px; padding-bottom:110px;">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:44px;">
+        <span class="mono eyebrow">See Us In Action</span>
+        <h2 style="margin-top:18px;">The Full Show Reel</h2>
+        <p>Four minutes of Flux at full scale — fire, fireworks, and production design in front of the country's biggest crowds.</p>
+      </div>
+      <div id="showreelBox" style="position:relative; width:100%; aspect-ratio:16/9; background:#000; border:1px solid #2A231F; overflow:hidden;">
+        <a href="https://youtu.be/AOsidJRkQEI" target="_blank" rel="noopener" id="showreelThumb" style="position:absolute; inset:0; display:block;">
+          <img src="https://img.youtube.com/vi/AOsidJRkQEI/maxresdefault.jpg" alt="Flux Entertainment show reel" style="width:100%; height:100%; object-fit:cover; opacity:0.75;">
+          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+            <div style="width:88px; height:88px; border-radius:50%; background:rgba(214,40,40,0.92); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 40px -8px rgba(214,40,40,0.7); transition:transform 0.2s ease;">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          <span class="mono" style="position:absolute; bottom:20px; left:24px; color:var(--bone); background:rgba(10,9,8,0.6); padding:8px 14px;">Hover to preview — click for full video</span>
+        </a>
+      </div>
+      <script>
+        // On the live site: hovering plays the reel inline with sound;
+        // moving away stops it. Click always opens the full video on YouTube.
+        (function(){
+          var box = document.getElementById('showreelBox');
+          var thumb = document.getElementById('showreelThumb');
+          var iframe = null;
+          var isTouch = window.matchMedia('(hover: none)').matches;
+          if (isTouch) return; // touch devices keep click-to-YouTube only
+          box.addEventListener('mouseenter', function(){
+            if (iframe) return;
+            iframe = document.createElement('iframe');
+            iframe.src = 'https://www.youtube.com/embed/AOsidJRkQEI?autoplay=1&mute=0&controls=1&rel=0';
+            iframe.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; border:0;';
+            iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+            iframe.allowFullscreen = true;
+            box.appendChild(iframe);
+            thumb.style.opacity = '0';
+            thumb.style.pointerEvents = 'none';
+          });
+          box.addEventListener('mouseleave', function(){
+            if (iframe) { box.removeChild(iframe); iframe = null; }
+            thumb.style.opacity = '1';
+            thumb.style.pointerEvents = 'auto';
+          });
+        })();
+      </script>
+    </div>
+  </section>
+
+  <!-- WHAT WE PROVIDE -->
+  <section class="provide">
+    <div class="mark-bg" style="top:20%; right:-300px; opacity:0.3;"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono eyebrow">What We Provide</span>
+        <h2 style="margin-top:18px;">Built For Every Stage</h2>
+        <p>A wide variety of professional, impactful and unique entertainment options and pyrotechnics, tailored to your event and suited to a wide audience demographic, nationally.</p>
+      </div>
+      <div class="tag-cloud">
+        <span>Large Productions</span>
+        <span>Television / Creative Media</span>
+        <span>Corporate</span>
+        <span>Weddings</span>
+        <span>Product / Brand Launches</span>
+        <span>Music Videos</span>
+        <span>Exhibitions</span>
+        <span>Sporting Events</span>
+        <span>Music Festivals</span>
+        <span>Private Events</span>
+        <span>Government &amp; Council</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust" style="margin-bottom:20px;">
+    <div class="trust-label mono">Venues</div>
+    <div class="marquee-track" style="animation-duration:42s;">
+      <div class="logo-box venue"><img src="/images/667b15a2117bad4a.png" alt="Gold Coast Convention and Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/6d8b1ce4a9a190e5.png" alt="Brisbane Convention & Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/5ae6059138729edb.png" alt="Stadiums Queensland logo"></div>
+      <div class="logo-box venue"><img src="/images/08666f08cfe51c91.png" alt="Perth Convention and Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/822a397ce91f45d7.png" alt="Nissan Arena logo"></div>
+      <div class="logo-box venue"><img src="/images/f4602c4e2452f479.png" alt="ICC Sydney logo"></div>
+      <div class="logo-box venue"><img src="/images/399d6f68817b4477.png" alt="InterContinental Hayman Island Resort logo"></div>
+      <div class="logo-box venue"><img src="/images/c683e44b0ca7fd85.png" alt="Melbourne Convention and Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/d9cdeda1ed925671.png" alt="The Star Sydney logo"></div>
+      <div class="logo-box venue"><img src="/images/849aa07c946b5578.png" alt="Treasury Brisbane logo"></div>
+      <div class="logo-box venue"><img src="/images/667b15a2117bad4a.png" alt="Gold Coast Convention and Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/6d8b1ce4a9a190e5.png" alt="Brisbane Convention & Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/5ae6059138729edb.png" alt="Stadiums Queensland logo"></div>
+      <div class="logo-box venue"><img src="/images/08666f08cfe51c91.png" alt="Perth Convention and Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/822a397ce91f45d7.png" alt="Nissan Arena logo"></div>
+      <div class="logo-box venue"><img src="/images/f4602c4e2452f479.png" alt="ICC Sydney logo"></div>
+      <div class="logo-box venue"><img src="/images/399d6f68817b4477.png" alt="InterContinental Hayman Island Resort logo"></div>
+      <div class="logo-box venue"><img src="/images/c683e44b0ca7fd85.png" alt="Melbourne Convention and Exhibition Centre logo"></div>
+      <div class="logo-box venue"><img src="/images/d9cdeda1ed925671.png" alt="The Star Sydney logo"></div>
+      <div class="logo-box venue"><img src="/images/849aa07c946b5578.png" alt="Treasury Brisbane logo"></div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="mark-bg"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono eyebrow">Entertainment</span>
+        <h2 style="margin-top:18px;">Ways We Deliver Impact</h2>
+        <p>Every act independently licensed, choreographed, and built to fit your event — from a single performer to a full production.</p>
+      </div>
+      <div class="service-list">
+        <a class="service-row" href="/pyrotechnics-performers">
+          <span class="service-name">Pyrotechnics Performers</span>
+          <span class="service-desc">Firework-dance acts, solo to full ensemble</span>
+          <span class="service-arrow">&#8594;</span>
+        </a>
+        <a class="service-row" href="/fire-shows-acts">
+          <span class="service-name">Fire Shows &amp; Acts</span>
+          <span class="service-desc">High-energy fire performance &amp; manipulation</span>
+          <span class="service-arrow">&#8594;</span>
+        </a>
+        <a class="service-row" href="/angle-grinding-performers">
+          <span class="service-name">Angle Grinding Performers</span>
+          <span class="service-desc">Industrial spark-shower performance art</span>
+          <span class="service-arrow">&#8594;</span>
+        </a>
+        <a class="service-row" href="/led-pixel-shows">
+          <span class="service-name">LED / Pixel Shows</span>
+          <span class="service-desc">Synchronised light &amp; pixel performance</span>
+          <span class="service-arrow">&#8594;</span>
+        </a>
+        <a class="service-row" href="/whip-cracking">
+          <span class="service-name">Whip Cracking</span>
+          <span class="service-desc">Precision skill-based novelty act</span>
+          <span class="service-arrow">&#8594;</span>
+        </a>
+        <a class="service-row" href="/customised-productions">
+          <span class="service-name">Customised Productions</span>
+          <span class="service-desc">Bespoke, large-scale show design</span>
+          <span class="service-arrow">&#8594;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT TEASER -->
+  <section class="about" id="about">
+    <div class="mark-bg" style="top:10%; left:-350px; opacity:0.3;"></div>
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <span class="mono eyebrow">Since 2020</span>
+        <h2 style="margin-top:18px; margin-bottom:22px; font-size:clamp(2.2rem,4vw,3.2rem);">Pyrotechnics As A Performing Art</h2>
+        <p>Founded by Kris Thiesfield &amp; Madison Young, Flux was born from a shared passion for flow arts, fire, and object manipulation — evolving into Australia's number one fire and pyrotechnics performance company.</p>
+        <p>Being the only independently licensed fireworks performers in the nation, Flux delivers high-impact, dynamic, choreographed productions guaranteed to move an audience — trusted nationally by stadiums, broadcasters, and major brands.</p>
+        <a href="/about" class="btn-ghost" style="display:inline-block; margin-top:10px;">Read Our Story</a>
+        <div class="about-stats">
+          <div class="stat"><div class="num">7</div><div class="lbl">States Serviced</div></div>
+          <div class="stat"><div class="num">2020</div><div class="lbl">Founded</div></div>
+          <div class="stat"><div class="num">3</div><div class="lbl">State Licences Held</div></div>
+          <div class="stat"><div class="num">5+</div><div class="lbl">Years Industry-Leading</div></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <img src="/images/971da3c7eff3a3dc.jpg" alt="Flux Entertainment performer with pyrotechnic wings" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono eyebrow">Reputation</span>
+        <h2 style="margin-top:18px;">What Clients Say</h2>
+      </div>
+    </div>
+    <div class="wrap" style="padding:0;">
+      <div class="test-grid">
+        <div class="test-card">
+          <p>"Incredible show last night! You absolutely delivered the vision and brought EkkaNITES 2025 to life."</p>
+          <div class="who">Royal QLD Exhibition</div>
+        </div>
+        <div class="test-card">
+          <p>"The content was exceptional and the execution consistently flawless."</p>
+          <div class="who">Village Roadshow</div>
+        </div>
+        <div class="test-card">
+          <p>"A great pre-game show that definitely delivered the big stadium impact we were looking for."</p>
+          <div class="who">SE Melbourne Phoenix</div>
+        </div>
+        <div class="test-card">
+          <p>"Documentation is of the highest standard — and truly world class."</p>
+          <div class="who">Queensland Cricket</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section class="cta" id="contact">
+    <div class="mark-bg"></div>
+    <div class="wrap cta-inner">
+      <span class="mono" style="color:rgba(244,237,228,0.7);">Book Now</span>
+      <h2 style="margin-top:18px;">Let's Make It<br>Unforgettable.</h2>
+      <p>Tell us about your event and we'll get back to you with what's possible — Australia wide.</p>
+      <div class="cta-actions">
+        <a href="mailto:info@fluxentertainment.com.au" class="btn-primary">Enquire Now</a>
+        <a href="tel:+61473458788" class="btn-ghost">Call — 0473 458 788</a>
+      </div>
+      <div class="contact-strip">
+        <span>Based in QLD — Servicing All of Australia</span>
+        <a href="mailto:info@fluxentertainment.com.au">info@fluxentertainment.com.au</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</Layout>

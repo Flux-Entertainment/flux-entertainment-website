@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = "Whip Cracking | Flux Entertainment";
+const description = "Rhythmic whip cracking & fire whip acts from Flux Entertainment — a highly technical artform deeply embedded in Australian culture. Day shows & fire whip add-ons.";
+---
+<Layout title={title} description={description}>
+  <Fragment slot="page-style">
+<style>
+  .svc-hero{
+    position:relative; min-height:60vh; padding-top:140px; padding-bottom:60px; overflow:hidden;
+    background:var(--void);
+  }
+  .svc-hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top; z-index:0;}
+  .svc-hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(to top, rgba(10,9,8,0.97) 0%, rgba(10,9,8,0.65) 55%, rgba(10,9,8,0.45) 100%),
+      radial-gradient(ellipse 70% 60% at 75% 25%, rgba(140,26,26,0.35) 0%, rgba(10,9,8,0) 65%);
+  }
+  .svc-hero h1{font-size:clamp(2.6rem, 6vw, 5rem); color:var(--bone); max-width:820px;}
+  .svc-breadcrumb{color:var(--ash-dim); font-size:0.82rem; margin-bottom:20px;}
+  .svc-breadcrumb a{color:var(--ash-dim);}
+  .svc-breadcrumb a:hover{color:var(--gold);}
+
+  .svc-photo{
+    aspect-ratio:3/4; background:
+      radial-gradient(circle at 30% 20%, rgba(214,40,40,0.35), transparent 60%), var(--char-2);
+    border:1px solid #2A231F;
+  }
+  .options-grid{display:grid; grid-template-columns:1fr; gap:0; position:relative; z-index:2; margin-top:26px; max-width:640px;}
+  .option-item{display:flex; align-items:center; gap:14px; padding:14px 0; border-top:1px solid #29221E; color:var(--ash); font-size:0.98rem;}
+  .option-item svg{width:18px; height:18px; color:var(--gold); flex-shrink:0;}
+
+  .photo-row{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; z-index:2;}
+  .photo-row .svc-photo{aspect-ratio:4/3;}
+
+  .highlight-block{
+    border-left:2px solid var(--flame); padding:6px 0 6px 28px; margin-top:50px;
+    position:relative; z-index:2;
+  }
+  .highlight-block p{color:var(--ash); font-size:1.05rem; line-height:1.6;}
+
+  .sfx-callout{
+    margin-top:50px; border:1px solid #2A231F; padding:32px; display:flex; align-items:center;
+    justify-content:space-between; gap:24px; flex-wrap:wrap; position:relative; z-index:2;
+  }
+  .sfx-callout p{color:var(--ash); max-width:560px; font-size:0.98rem;}
+  .sfx-callout p strong{color:var(--bone);}
+
+  @media (max-width:860px){
+    .options-grid{grid-template-columns:1fr;}
+    .photo-row{grid-template-columns:1fr 1fr;}
+    .about-grid{grid-template-columns:1fr;}
+  }
+</style>
+  </Fragment>
+<main id="top">
+
+  <!-- SERVICE HERO -->
+  <section class="svc-hero">
+    <video class="svc-hero-video" autoplay muted loop playsinline aria-label="Flux Entertainment whip cracking performance at a rodeo arena">
+      <source src="https://videos.fluxentertainment.com.au/whip-hero.mp4" type="video/mp4">
+    </video>
+    <div class="svc-hero-overlay"></div>
+    <div class="mark-bg" style="top:-150px; right:-200px; opacity:0.3; z-index:1;"></div>
+    <div class="wrap" style="position:relative; z-index:2;">
+      <div class="svc-breadcrumb"><a href="/">Home</a> / <a href="/#services">Entertainment</a> / Whip Cracking</div>
+      <span class="mono eyebrow">Entertainment</span>
+      <h1 style="margin-top:18px;">Whip Cracking</h1>
+      <p class="hero-sub" style="margin-top:22px;">A relatively dangerous and highly technical artform deeply embedded in Australian culture — we love all things whips.</p>
+      <div class="hero-actions">
+        <a href="/contact" class="btn-primary">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="about" style="padding-top:70px; padding-bottom:50px;">
+    <div class="mark-bg" style="top:10%; left:-350px; opacity:0.25;"></div>
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <p>From rhythmic whip cracking and whip cracking stunts to raging fireballs off the end of a fire whip — we love all things whips.</p>
+        <p>It's often the act people remember most — a sharp, sudden crack cuts through a crowd in a way fire and pyrotechnics can't. We use it as a punchy opener, a rhythmic interlude between bigger moments, or a fire-laced finale that closes a show on a bang.</p>
+        <p>Whip cracking runs deeper in Flux than our socials might suggest — our headquarters sits in rural Australia, where the whip is practically part of the landscape, and it's consistently one of our most requested acts. Our performers aren't just competent with a whip — they're some of the sharpest in the business, and it shows the moment they start cracking.</p>
+        <p>Whip cracking is a relatively dangerous and highly technical artform that is deeply embedded in Australian culture. We can provide anything from standalone whip cracking day shows to fire whip cracking add-ons to other Flux performances.</p>
+        <a href="/contact" class="btn-ghost" style="display:inline-block; margin-top:10px;">Enquire About This Show</a>
+      </div>
+      <div class="svc-photo" style="overflow:hidden;">
+        <video autoplay muted loop playsinline aria-label="Flux Entertainment whip cracking performer close-up" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+          <source src="https://videos.fluxentertainment.com.au/whip-paragraph-video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVAILABLE OPTIONS -->
+  <section class="provide" style="padding-top:60px; background:
+      linear-gradient(to bottom, rgba(10,9,8,0.6) 0%, rgba(10,9,8,0.92) 70%, var(--void) 100%),
+      url('/images/be8cad6ea2b6b4cb.jpg');
+      background-size:cover; background-position:40% center; background-repeat:no-repeat;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono eyebrow">What's Included</span>
+        <h2 style="margin-top:18px;">Available Options</h2>
+      </div>
+      <div class="options-grid">
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Day whip cracking shows / demonstrations</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Whip cracking add-ons to other Flux shows</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Rhythmic whip cracking &amp; whip cracking stunts</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Fire whip cracking add-ons to other Flux shows</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE VIDEO -->
+  <section style="padding-top:70px; padding-bottom:70px; background:var(--char);">
+    <div class="wrap">
+      <div style="aspect-ratio:16/9; background:var(--char-2); border:1px solid #2A231F; overflow:hidden; margin-bottom:50px;">
+        <video id="whipFeatureVideo" muted loop playsinline aria-label="Flux Entertainment whip cracking show reel" style="width:100%; height:100%; object-fit:cover;">
+          <source src="https://videos.fluxentertainment.com.au/whip-for-web.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="highlight-block">
+        <p>Having worked with some of Australia's biggest names in private capacities, Flux Entertainment provides a dynamic entertainment excellence.</p>
+      </div>
+
+      <div class="sfx-callout">
+        <p>Enhance your experience even further with <strong>Flux SFX</strong> — choreographed fireworks, flame effects, and stage effects that elevate any performance into something even more immersive.</p>
+        <a href="https://www.fluxsfx.com.au" target="_blank" rel="noopener" class="btn-ghost">Explore Flux SFX</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUSTED BY -->
+  <div class="trust" style="margin-top:0;">
+    <div class="trust-label mono">Who We've Worked With</div>
+    <div class="marquee-track">
+      __CLIENT_LOGOS__
+      __CLIENT_LOGOS__
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta" id="contact-cta" style="background:
+      linear-gradient(140deg, rgba(140,26,26,0.55), rgba(10,9,8,0.88) 65%),
+      url('/images/780aebb9414c426e.jpg');
+      background-size:cover; background-position:center;">
+    <div class="mark-bg"></div>
+    <div class="wrap cta-inner">
+      <span class="mono" style="color:rgba(244,237,228,0.7);">Book Now</span>
+      <h2 style="margin-top:18px;">Let's Make It<br>Unforgettable.</h2>
+      <p>Tell us about your event and we'll get back to you with what's possible — Australia wide.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="btn-primary">Enquire Now</a>
+        <a href="tel:+61473458788" class="btn-ghost">Call — 0473 458 788</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</Layout>

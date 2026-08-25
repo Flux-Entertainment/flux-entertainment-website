@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = "About Flux Entertainment | Australia's Fire & Pyrotechnics Performers";
+const description = "Founded in 2020, Flux is Australia's only independently licensed fireworks performance company — trusted by stadiums, broadcasters, and major brands nationwide.";
+---
+<Layout title={title} description={description}>
+  <Fragment slot="page-style">
+<style>
+  .page-hero{
+    position:relative;
+    min-height:66vh; padding-top:140px; padding-bottom:40px;
+    overflow:hidden;
+    background:var(--void);
+  }
+  .page-hero-video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center top; z-index:0;
+  }
+  .page-hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(to top, rgba(10,9,8,0.97) 0%, rgba(10,9,8,0.65) 55%, rgba(10,9,8,0.45) 100%),
+      radial-gradient(ellipse 70% 60% at 25% 25%, rgba(140,26,26,0.35) 0%, rgba(10,9,8,0) 65%);
+  }
+  .page-hero h1{font-size:clamp(2.6rem, 6vw, 5rem); color:var(--bone); max-width:820px;}
+  .event-list{
+    display:grid; grid-template-columns:1fr 1fr; gap:0 50px;
+    margin-top:26px; position:relative; z-index:2;
+  }
+  .event-col{display:flex; flex-direction:column;}
+  .event-item{
+    padding:16px 0; border-top:1px solid #29221E;
+    color:var(--ash); font-size:0.95rem; line-height:1.5;
+  }
+  .event-item strong{color:var(--bone); font-weight:600;}
+  .license-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#29221E; margin-top:20px;}
+  .license-card{background:var(--char); padding:30px 26px;}
+  .license-card .tag{font-family:'IBM Plex Mono', monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold);}
+  .license-card p{color:var(--ash); font-size:0.92rem; margin-top:10px;}
+  .video-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; position:relative; z-index:2;}
+  .video-card{position:relative;}
+  .video-thumb{
+    position:relative; aspect-ratio:16/9; background:#000;
+    border:1px solid #2A231F; overflow:hidden; cursor:pointer;
+  }
+  .video-thumb img{width:100%; height:100%; object-fit:cover; opacity:0.75;}
+  .play-btn{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  }
+  .play-btn svg{
+    width:56px; height:56px; border-radius:50%; background:rgba(214,40,40,0.92);
+    padding:17px; box-shadow:0 8px 28px -8px rgba(214,40,40,0.7);
+    transition:transform 0.2s ease;
+  }
+  .video-thumb:hover .play-btn svg{transform:scale(1.08);}
+  .video-caption{
+    margin-top:12px; font-family:'IBM Plex Mono', monospace; font-size:0.75rem;
+    letter-spacing:0.06em; color:var(--ash); text-transform:uppercase;
+  }
+  @media (max-width:860px){
+    .event-list{grid-template-columns:1fr;}
+    .video-grid{grid-template-columns:1fr;}
+  }
+  .founders-photo{
+    aspect-ratio:4/5;
+    background:radial-gradient(circle at 30% 20%, rgba(214,40,40,0.4), transparent 60%), var(--char-2);
+    border:1px solid #2A231F;
+    overflow:hidden;
+  }
+  @media (max-width:860px){
+    .license-grid{grid-template-columns:1fr;}
+  }
+</style>
+  </Fragment>
+<main id="top">
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <video class="page-hero-video" autoplay muted loop playsinline aria-label="Flux Entertainment fire performance footage">
+      <source src="https://videos.fluxentertainment.com.au/about-hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="page-hero-overlay"></div>
+    <div class="mark-bg" style="top:-150px; right:-200px; opacity:0.35; z-index:1;"></div>
+    <div class="wrap" style="position:relative; z-index:2;">
+      <span class="mono eyebrow">Since 2020</span>
+      <h1 style="margin-top:18px;">Pyrotechnics As A Performing Art</h1>
+      <p class="hero-sub" style="margin-top:24px;">Founded by Kris Thiesfield &amp; Madison Young, Flux was born from a shared passion for flow arts, fire, and object manipulation — evolving into Australia's number one fire and pyrotechnics performance company.</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="about" style="padding-top:60px;">
+    <div class="mark-bg" style="top:10%; left:-350px; opacity:0.25;"></div>
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <span class="mono eyebrow">Our Story</span>
+        <h2 style="margin-top:18px; margin-bottom:22px; font-size:clamp(2rem,4vw,2.8rem);">Built On Flow Arts &amp; Fire</h2>
+        <p>What began as two performers with a shared love of flow arts, fire, object manipulation and fireworks has grown into Australia's leading fire and pyrotechnics performance company — trusted by broadcasters, stadiums, and major brands nationwide.</p>
+        <p>Being the only independently licensed fireworks performers in the nation, Flux delivers high-impact, dynamic, choreographed productions guaranteed to move an audience. Every show is built from the ground up — choreography, pyrotechnic design, and safety planning — for the specific event it's built for.</p>
+        <p>Today, Flux is licensed to perform in Queensland, New South Wales, Northern Territory and the ACT, with those licences mutually recognised nationally. The team can service all Australian states &amp; territories, with a talented team of almost 20 performers &amp; crew.</p>
+      </div>
+      <div class="founders-photo">
+        <img src="/images/7c04038b17eb1ecf.jpg" alt="Flux Entertainment performer" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS TIMELINE -->
+  <section class="services" style="background:
+      linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(23,19,16,0.9) 60%, var(--char) 100%),
+      url('/images/008d7d6d31495cf0.jpg');
+      background-size:cover; background-position:center; background-repeat:no-repeat;">
+    <div class="mark-bg"></div>
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono eyebrow">Track Record</span>
+        <h2 style="margin-top:18px;">Notable Events</h2>
+      </div>
+      <div class="event-list">
+        <div class="event-col">
+          <div class="event-item"><strong>Royal Queensland Exhibition</strong> — delivered the pyrotechnic show for three consecutive years (2023–2025).</div>
+          <div class="event-item"><strong>Village Roadshow — Movie World Fright Nights</strong> — produced fire &amp; pyro entertainment for three consecutive years (2023–2025).</div>
+          <div class="event-item"><strong>ACT Government</strong> — contracted for a large-scale fire &amp; pyrotechnics production (2024–2026).</div>
+          <div class="event-item"><strong>Sony &amp; Brisbane City Council</strong> — staged a world-first fire production (2025).</div>
+          <div class="event-item"><strong>Australian Tattoo Expo</strong> — full capital city tour (2023).</div>
+          <div class="event-item"><strong>Channel 7</strong> — multiple appearances, including live broadcast coverage (2022–2026).</div>
+          <div class="event-item"><strong>Foxtel &amp; Kayo Sports</strong> — live broadcast appearances (2024–2026).</div>
+        </div>
+        <div class="event-col">
+          <div class="event-item"><strong>Channel 9</strong> — appearances, including live broadcast coverage (2025).</div>
+          <div class="event-item"><strong>Australia's Got Talent</strong> — competed as contestants, plus a national TV commercial (2022).</div>
+          <div class="event-item"><strong>National Basketball League</strong> — pre-game entertainment (2025).</div>
+          <div class="event-item"><strong>Big Bash T20 League</strong> — pre-game &amp; intermission entertainment (2025).</div>
+          <div class="event-item"><strong>V8 Supercars</strong> — entertainment for driver announcements (2024).</div>
+          <div class="event-item"><strong>Hancock Prospecting</strong> — private performance (2022).</div>
+          <div class="event-item"><strong>Royal Melbourne Show</strong> — performances (2026).</div>
+        </div>
+      </div>
+
+      <div style="margin-top:70px;">
+        <div class="section-head" style="margin-bottom:36px;">
+          <span class="mono eyebrow">In The Media</span>
+          <h2 style="margin-top:18px; font-size:clamp(1.8rem,3.5vw,2.6rem);">Watch &amp; Listen</h2>
+        </div>
+        <div class="video-grid">
+          <div class="video-card" data-video-id="CFudwFY4qBk">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/CFudwFY4qBk/hqdefault.jpg" alt="Dojo Media Podcast interview with Flux Entertainment"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <p class="video-caption">Dojo Media Podcast Interview</p>
+          </div>
+          <div class="video-card" data-video-id="mL-dqmnWCfU">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/mL-dqmnWCfU/hqdefault.jpg" alt="Flux Entertainment featured on 7 Queensland Weekender"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <p class="video-caption">7 Queensland Weekender</p>
+          </div>
+          <div class="video-card" data-video-id="haMq7R0vfXs">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/haMq7R0vfXs/hqdefault.jpg" alt="Flux Entertainment Australia's Got Talent commercial"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <p class="video-caption">AGT Commercial</p>
+          </div>
+          <div class="video-card" data-video-id="BFOTPVarRoQ">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/BFOTPVarRoQ/hqdefault.jpg" alt="Flux Entertainment performing at V8 Supercars Sydney"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <p class="video-caption">V8 Supercars Sydney</p>
+          </div>
+          <div class="video-card" data-video-id="fK44tF_-bgg">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/fK44tF_-bgg/hqdefault.jpg" alt="Flux Entertainment Australia's Got Talent 2022 audition"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <p class="video-caption">AGT Audition 2022</p>
+          </div>
+          <div class="video-card" data-video-id="eXQnrn04L34">
+            <div class="video-thumb"><img src="https://img.youtube.com/vi/eXQnrn04L34/hqdefault.jpg" alt="Flux Entertainment on Channel 7 News 2023"><div class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg></div></div>
+            <p class="video-caption">Channel 7 News (2023)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LICENSING -->
+  <section class="provide" style="background:var(--void);">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono eyebrow">Credentials</span>
+        <h2 style="margin-top:18px;">Licensed. Insured. Nationally Recognised.</h2>
+      </div>
+      <div class="license-grid">
+        <div class="license-card">
+          <div class="tag">Licensing</div>
+          <p>Independently licensed pyrotechnics performers in Queensland, New South Wales, Northern Territory and the ACT — with mutual recognition extending that licensing across every state and territory in Australia.</p>
+        </div>
+        <div class="license-card">
+          <div class="tag">Coverage</div>
+          <p>Shows &amp; services delivered end-to-end across Queensland, New South Wales, Victoria, South Australia, Western Australia, Northern Territory and the ACT — seven states and territories serviced nationally.</p>
+        </div>
+        <div class="license-card">
+          <div class="tag">Standards</div>
+          <p>Every production is planned with full risk assessment, insurance, and on-site safety management — built for stadiums, broadcasters, and government events alike.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact-cta" style="background:
+      linear-gradient(140deg, rgba(140,26,26,0.55), rgba(10,9,8,0.88) 65%),
+      url('/images/1e86b4fd135dff92.jpg');
+      background-size:cover; background-position:center;">
+    <div class="mark-bg"></div>
+    <div class="wrap cta-inner">
+      <span class="mono" style="color:rgba(244,237,228,0.7);">Book Now</span>
+      <h2 style="margin-top:18px;">Let's Make It<br>Unforgettable.</h2>
+      <p>Tell us about your event and we'll get back to you with what's possible — Australia wide.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="btn-primary">Enquire Now</a>
+        <a href="tel:+61473458788" class="btn-ghost">Call — 0473 458 788</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</Layout>

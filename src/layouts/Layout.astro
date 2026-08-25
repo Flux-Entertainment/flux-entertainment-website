@@ -1,0 +1,579 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0A0908;
+    --char:#161210;
+    --char-2:#1F1916;
+    --flame:#D62828;
+    --flame-dim:#8C1A1A;
+    --ember:#F77F00;
+    --gold:#FCBF49;
+    --bone:#F4EDE4;
+    --ash:#A89A8C;
+    --ash-dim:#6E645A;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--void);
+    color:var(--bone);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3, .display{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:0.95;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.15em;
+    font-size:0.72rem;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 28px;}
+
+  /* watermark motif */
+  .mark-bg{
+    position:absolute;
+    width:900px; height:900px;
+    background: radial-gradient(circle at center, rgba(214,40,40,0.10) 0%, rgba(214,40,40,0) 70%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:linear-gradient(to bottom, rgba(10,9,8,0.92), rgba(10,9,8,0));
+    padding:18px 0;
+    transition: background 0.3s ease;
+  }
+  header .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .logo-mark{height:78px;}
+  nav{display:flex; align-items:center; gap:34px;}
+  .ig-link{display:flex; align-items:center; gap:8px; color:var(--ash) !important;}
+  .ig-link svg{width:16px; height:16px;}
+  .ig-link:hover{color:var(--gold) !important;}
+  nav a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ash);
+    transition:color 0.2s ease;
+    position:relative;
+  }
+  nav a:hover{color:var(--bone);}
+  .nav-cta{
+    border:1px solid var(--flame);
+    color:var(--bone) !important;
+    padding:11px 22px;
+    background:linear-gradient(120deg, var(--flame), var(--flame-dim));
+  }
+  .nav-toggle{display:none;}
+
+  .has-dropdown{position:relative;}
+  .dropdown-trigger{display:flex; align-items:center; gap:6px; cursor:pointer;}
+  .dropdown-trigger svg{width:10px; height:10px; transition:transform 0.2s ease;}
+  .has-dropdown:hover .dropdown-trigger svg{transform:rotate(180deg);}
+  .dropdown-menu{
+    position:absolute; top:calc(100% + 18px); left:50%; transform:translateX(-50%);
+    background:var(--char); border:1px solid #2A231F;
+    min-width:240px; padding:10px 0;
+    opacity:0; visibility:hidden; transform:translateX(-50%) translateY(6px);
+    transition:opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index:10;
+  }
+  .has-dropdown:hover .dropdown-menu{
+    opacity:1; visibility:visible; transform:translateX(-50%) translateY(0);
+  }
+  .dropdown-menu a{
+    display:block; padding:11px 22px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ash);
+    border-bottom:1px solid #201A17;
+  }
+  .dropdown-menu a:last-child{border-bottom:none;}
+  .dropdown-menu a:hover{color:var(--gold); background:rgba(214,40,40,0.06);}
+  @media (max-width:860px){
+    .dropdown-menu{
+      position:static; opacity:1; visibility:visible; transform:none;
+      background:none; border:none; padding:6px 0 6px 16px; min-width:0;
+      display:none;
+    }
+    .has-dropdown.mobile-open .dropdown-menu{display:block;}
+    .dropdown-menu a{padding:10px 0; border:none; color:var(--ash-dim);}
+    .dropdown-trigger svg{display:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:120px;
+    overflow:hidden;
+    background:var(--void);
+  }
+  .hero-video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(to top, rgba(10,9,8,0.95) 0%, rgba(10,9,8,0.55) 40%, rgba(10,9,8,0.35) 100%),
+      radial-gradient(ellipse 70% 60% at 25% 25%, rgba(140,26,26,0.35) 0%, rgba(10,9,8,0) 65%);
+  }
+  .hero .mark-bg{ top:-200px; right:-250px; width:1100px; height:1100px; opacity:0.35; z-index:1;}
+  .hero-grain{
+    position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events:none;
+    z-index:1;
+  }
+  .ember{
+    position:absolute;
+    bottom:-10px;
+    width:5px; height:5px;
+    border-radius:50%;
+    background:var(--ember);
+    box-shadow:0 0 10px 2px var(--ember);
+    animation: rise linear infinite;
+    opacity:0.8;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) translateX(0); opacity:0.9;}
+    90%{opacity:0.5;}
+    100%{ transform:translateY(-100vh) translateX(20px); opacity:0;}
+  }
+  .hero-inner{position:relative; z-index:2; width:100%;}
+  .eyebrow-row{display:flex; align-items:center; gap:14px; margin-bottom:28px;}
+  .eyebrow-row .line{width:40px; height:1px; background:var(--flame);}
+  .eyebrow{color:var(--gold);}
+  .hero h1{
+    font-size:clamp(3rem, 8vw, 7.2rem);
+    max-width:1000px;
+    color:var(--bone);
+  }
+  .hero h1 .accent{
+    background:linear-gradient(100deg, var(--flame) 10%, var(--ember) 50%, var(--gold) 90%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero-sub{
+    max-width:560px;
+    margin-top:28px;
+    color:var(--ash);
+    font-size:1.05rem;
+  }
+  .hero-actions{display:flex; gap:18px; margin-top:44px; flex-wrap:wrap;}
+  .btn-primary{
+    background:linear-gradient(120deg, var(--flame), var(--flame-dim));
+    color:var(--bone);
+    padding:17px 34px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    border:1px solid var(--flame);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 30px -10px rgba(214,40,40,0.6);}
+  .btn-ghost{
+    color:var(--bone);
+    padding:17px 26px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    border:1px solid var(--ash-dim);
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
+
+  .scroll-cue{
+    position:absolute; bottom:38px; left:28px;
+    display:flex; align-items:center; gap:12px;
+    color:var(--ash-dim);
+    z-index:2;
+  }
+  .scroll-cue .stick{width:1px; height:44px; background:linear-gradient(to bottom, var(--flame), transparent);}
+
+  /* ---------- TRUST MARQUEE ---------- */
+  .trust{
+    border-top:1px solid #241E1A;
+    border-bottom:1px solid #241E1A;
+    padding:26px 0;
+    background:var(--char);
+    overflow:hidden;
+    position:relative;
+  }
+  .trust-label{
+    position:absolute; left:28px; top:50%; transform:translateY(-50%);
+    background:var(--char);
+    padding-right:20px;
+    color:var(--ash-dim);
+    z-index:2;
+  }
+  .marquee-track{
+    display:flex;
+    gap:64px;
+    white-space:nowrap;
+    animation: scroll 38s linear infinite;
+    padding-left:220px;
+  }
+  @keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  .marquee-track span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    color:var(--ash);
+    text-transform:uppercase;
+  }
+  .logo-box{
+    height:56px;
+    width:150px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:4px;
+  }
+  .logo-box img{
+    display:block;
+    max-height:100%;
+    max-width:100%;
+    width:auto;
+    height:auto;
+    margin:auto;
+    object-fit:contain;
+    opacity:0.6;
+    filter:brightness(0) invert(1);
+    transition:opacity 0.25s ease;
+  }
+  .logo-box:hover img{opacity:1;}
+  .venue-row{
+    display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+    padding-left:220px;
+  }
+  @media (max-width:860px){
+    .trust-label{position:static; display:block; padding:0 28px 14px;}
+    .venue-row, .marquee-track{padding-left:28px;}
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{position:relative; padding:130px 0;}
+  .section-head{max-width:640px; margin-bottom:70px; position:relative; z-index:2;}
+  .section-head h2{font-size:clamp(2.4rem, 5vw, 4rem); color:var(--bone);}
+  .section-head p{color:var(--ash); margin-top:18px; font-size:1.05rem;}
+
+  /* ---------- WHAT WE PROVIDE ---------- */
+  .provide{
+    position:relative;
+    background:
+      linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(10,9,8,0.85) 55%, var(--void) 100%),
+      url("/images/b13fb03a0be64824.jpg");
+    background-size:cover;
+    background-position:bottom center;
+    background-repeat:no-repeat;
+  }
+  .tag-cloud{display:flex; flex-wrap:wrap; gap:14px; position:relative; z-index:2;}
+  .tag-cloud span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    padding:12px 20px;
+    border:1px solid #2A231F;
+    color:var(--ash);
+    transition:all 0.25s ease;
+  }
+  .tag-cloud span:hover{border-color:var(--flame); color:var(--gold); background:rgba(214,40,40,0.06);}
+
+  /* ---------- SERVICES ---------- */
+  .services{
+    position:relative;
+    background:
+      linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(23,19,16,0.9) 60%, var(--char) 100%),
+      url("/images/70ef51cefa2977a4.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+  }
+  .services .mark-bg{ bottom:-300px; left:-250px; opacity:0.4;}
+  .service-list{position:relative; z-index:2;}
+  .service-row{
+    display:grid;
+    grid-template-columns:1fr 240px 28px;
+    align-items:center;
+    gap:26px;
+    padding:30px 0;
+    border-top:1px solid #29221E;
+    transition:background 0.25s ease, padding-left 0.25s ease;
+  }
+  .service-row:last-child{border-bottom:1px solid #29221E;}
+  .service-row:hover{background:rgba(214,40,40,0.05); padding-left:14px;}
+  .service-name{
+    font-family:'Anton', sans-serif;
+    font-size:clamp(1.3rem, 3vw, 2rem);
+    text-transform:uppercase;
+    color:var(--bone);
+  }
+  .service-desc{color:var(--ash-dim); font-size:0.88rem; line-height:1.5;}
+  .service-arrow{color:var(--ash-dim); transition:transform 0.25s ease, color 0.25s ease;}
+  .service-row:hover .service-arrow{transform:translateX(6px); color:var(--gold);}
+
+  /* ---------- ABOUT TEASER ---------- */
+  .about{background:var(--void);}
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; position:relative; z-index:2;}
+  .about-copy p{color:var(--ash); margin-bottom:20px; font-size:1.02rem;}
+  .about-stats{display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#241E1A; margin-top:36px;}
+  .stat{background:var(--void); padding:26px 22px;}
+  .stat .num{font-family:'Anton', sans-serif; font-size:2.2rem; color:var(--gold);}
+  .stat .lbl{font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ash-dim); margin-top:6px;}
+  .about-visual{
+    aspect-ratio:4/5;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(214,40,40,0.4), transparent 60%),
+      linear-gradient(160deg, #1F1916, #0A0908);
+    border:1px solid #2A231F;
+    display:flex; align-items:center; justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .about-visual .mark-mono{width:55%; opacity:0.9; filter: drop-shadow(0 0 40px rgba(214,40,40,0.5));}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{background:var(--char);}
+  .test-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:#29221E; position:relative; z-index:2;}
+  .test-card{background:var(--char); padding:44px;}
+  .test-card p{font-family:'Anton', sans-serif; font-weight:400; text-transform:none; letter-spacing:0; font-size:1.3rem; line-height:1.3; color:var(--bone);}
+  .test-card .who{margin-top:20px; color:var(--gold); font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase;}
+
+  /* ---------- CTA / CONTACT ---------- */
+  .cta{
+    background:
+      linear-gradient(140deg, rgba(140,26,26,0.55), rgba(10,9,8,0.88) 65%),
+      url("/images/46e12eaf360e6610.jpg");
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+  }
+  .cta .mark-bg{top:-300px; left:50%; transform:translateX(-50%); width:1300px; height:1300px; opacity:0.6;}
+  .cta-inner{position:relative; z-index:2;}
+  .cta h2{font-size:clamp(2.6rem, 7vw, 5.5rem); color:var(--bone);}
+  .cta p{color:rgba(244,237,228,0.75); max-width:520px; margin:22px auto 0; font-size:1.05rem;}
+  .cta-actions{display:flex; gap:18px; justify-content:center; margin-top:44px; flex-wrap:wrap;}
+  .cta .btn-ghost{border-color:rgba(244,237,228,0.35);}
+  .cta .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
+  .contact-strip{
+    display:flex; justify-content:center; gap:50px; margin-top:60px;
+    flex-wrap:wrap;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.8rem;
+    color:rgba(244,237,228,0.6);
+  }
+  .contact-strip a{color:var(--bone); border-bottom:1px solid rgba(244,237,228,0.3);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--void); padding:60px 0 34px; border-top:1px solid #201A17;}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; gap:40px; flex-wrap:wrap; padding-bottom:40px;}
+  .footer-logo{height:58px; margin-bottom:16px;}
+  .footer-tag{color:var(--ash-dim); font-size:0.9rem; max-width:280px;}
+  .footer-cols{display:flex; gap:70px; flex-wrap:wrap;}
+  .footer-col .mono{color:var(--ash-dim); margin-bottom:16px; display:block;}
+  .footer-col a{display:block; color:var(--ash); font-size:0.88rem; margin-bottom:10px; transition:color 0.2s ease;}
+  .footer-col a:hover{color:var(--gold);}
+  .sister-band{
+    background:var(--char);
+    border-top:1px solid #241E1A;
+    border-bottom:1px solid #241E1A;
+  }
+  .sister-band a{
+    display:flex; align-items:center; justify-content:center; gap:28px;
+    padding:36px 28px;
+    flex-wrap:wrap;
+    text-align:center;
+    transition:background 0.25s ease;
+  }
+  .sister-band a:hover{background:rgba(214,40,40,0.06);}
+  .sister-band .sfx-logo{
+    height:56px;
+    width:auto;
+  }
+  .sister-band .sister-copy{color:var(--ash); font-size:1rem;}
+  .sister-band .sister-copy strong{color:var(--bone);}
+  .footer-bottom{
+    border-top:1px solid #201A17; padding-top:26px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    color:var(--ash-dim); font-size:0.78rem;
+  }
+
+  @media (max-width: 860px){
+    nav{
+      position:fixed; top:0; right:-100%; height:100vh; width:78%;
+      background:var(--char); flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:0 40px; transition:right 0.3s ease; gap:26px;
+    }
+    nav.open{right:0;}
+    .nav-toggle{display:block; z-index:60; background:none; border:none; color:var(--bone); font-size:1.6rem;}
+    .about-grid{grid-template-columns:1fr;}
+    .test-grid{grid-template-columns:1fr;}
+    .service-row{grid-template-columns:1fr 26px; }
+    .service-desc{display:none;}
+    section{padding:80px 0;}
+  }
+</style>
+  <slot name="page-style" />
+</head>
+<body>
+<header id="site-header">
+  <div class="wrap">
+    <a href="#top"><img class="logo-mark" src="/images/0dd428d998516428.png" alt="Flux Entertainment"></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <nav id="siteNav">
+      <div class="has-dropdown" id="entDropdown">
+        <span class="dropdown-trigger">
+          <a href="/#services">Entertainment</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </span>
+        <div class="dropdown-menu">
+          <a href="/pyrotechnics-performers">Pyrotechnics Performers</a>
+          <a href="/fire-shows-acts">Fire Shows &amp; Acts</a>
+          <a href="/angle-grinding-performers">Angle Grinding Performers</a>
+          <a href="/led-pixel-shows">LED / Pixel Shows</a>
+          <a href="/whip-cracking">Whip Cracking</a>
+          <a href="/customised-productions">Customised Productions</a>
+        </div>
+      </div>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="https://www.instagram.com/flux_entertainment" target="_blank" rel="noopener" class="ig-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <span class="mono">@flux_entertainment</span>
+      </a>
+      <a href="/contact" class="nav-cta">Book Now</a>
+    </nav>
+  </div>
+</header>
+<slot />
+<div class="sister-band">
+  <a href="https://www.fluxsfx.com.au" target="_blank" rel="noopener">
+    <img class="sfx-logo" src="/images/a296d7dd2c0e4753.png" alt="Flux SFX">
+    <span class="sister-copy">Need fireworks or special effects too? <strong>Flux SFX</strong>, our sister company, delivers that side of the show — visit fluxsfx.com.au</span>
+  </a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <img class="footer-logo" src="/images/0dd428d998516428.png" alt="Flux Entertainment">
+        <p class="footer-tag">Australia's leading fire &amp; pyrotechnics performance company. Professional, safe, unforgettable — every time.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <span class="mono">Entertainment</span>
+          <a href="/pyrotechnics-performers">Pyrotechnics Performers</a>
+          <a href="/fire-shows-acts">Fire Shows &amp; Acts</a>
+          <a href="/angle-grinding-performers">Angle Grinding</a>
+          <a href="/led-pixel-shows">LED / Pixel Shows</a>
+          <a href="/whip-cracking">Whip Cracking</a>
+          <a href="/customised-productions">Customised Productions</a>
+        </div>
+        <div class="footer-col">
+          <span class="mono">Studio</span>
+          <a href="/about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="#contact">Book Now</a>
+        </div>
+        <div class="footer-col">
+          <span class="mono">Connect</span>
+          <a href="https://www.instagram.com/flux_entertainment" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/fluxentertainment.pyrotechnics/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.youtube.com/channel/UCt079qpp2QLodEhTrJIeBGg" target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Flux Productions Australia Pty Ltd. ABN 68 720 814 599.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('siteNav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', (e) => {
+    if (a.closest('.dropdown-trigger')) return; // handled separately below
+    nav.classList.remove('open');
+  }));
+
+  // Mobile: tap "Entertainment" label to expand/collapse the dropdown instead of navigating
+  const entDropdown = document.getElementById('entDropdown');
+  const entTrigger = entDropdown.querySelector('.dropdown-trigger');
+  entTrigger.addEventListener('click', (e) => {
+    if (window.matchMedia('(max-width:860px)').matches) {
+      e.preventDefault();
+      entDropdown.classList.toggle('mobile-open');
+    }
+  });
+  entDropdown.querySelectorAll('.dropdown-menu a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 40){ header.style.background = 'rgba(10,9,8,0.92)'; }
+    else { header.style.background = 'linear-gradient(to bottom, rgba(10,9,8,0.92), rgba(10,9,8,0))'; }
+  });
+
+  // ember particles
+  const hero = document.querySelector('.hero');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(hero && !prefersReduced){
+    for(let i=0;i<22;i++){
+      const e = document.createElement('div');
+      e.className = 'ember';
+      e.style.left = Math.random()*100 + '%';
+      e.style.animationDuration = (8 + Math.random()*10) + 's';
+      e.style.animationDelay = (Math.random()*10) + 's';
+      e.style.width = e.style.height = (2 + Math.random()*4) + 'px';
+      hero.appendChild(e);
+    }
+  }
+</script>
+</body>
+</html>

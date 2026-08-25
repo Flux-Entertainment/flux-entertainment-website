@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+const title = "Fire Shows & Acts | Flux Entertainment";
+const description = "High-impact, well-choreographed fire shows from Flux Entertainment — solo to large group acts, fire eaters, and unique fire props. Australia's most impactful fire performers.";
+---
+<Layout title={title} description={description}>
+  <Fragment slot="page-style">
+<style>
+  .svc-hero{
+    position:relative; min-height:60vh; padding-top:140px; padding-bottom:60px; overflow:hidden;
+    background:var(--void);
+  }
+  .svc-hero-video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center center; z-index:0;}
+  .svc-hero-overlay{
+    position:absolute; inset:0; z-index:1;
+    background:
+      linear-gradient(to top, rgba(10,9,8,0.97) 0%, rgba(10,9,8,0.65) 55%, rgba(10,9,8,0.45) 100%),
+      radial-gradient(ellipse 70% 60% at 75% 25%, rgba(140,26,26,0.35) 0%, rgba(10,9,8,0) 65%);
+  }
+  .svc-hero h1{font-size:clamp(2.6rem, 6vw, 5rem); color:var(--bone); max-width:820px;}
+  .svc-breadcrumb{color:var(--ash-dim); font-size:0.82rem; margin-bottom:20px;}
+  .svc-breadcrumb a{color:var(--ash-dim);}
+  .svc-breadcrumb a:hover{color:var(--gold);}
+
+  .svc-photo{
+    aspect-ratio:3/4; background:
+      radial-gradient(circle at 30% 20%, rgba(214,40,40,0.35), transparent 60%), var(--char-2);
+    border:1px solid #2A231F;
+  }
+  .options-grid{display:grid; grid-template-columns:1fr; gap:0; position:relative; z-index:2; margin-top:26px; max-width:640px;}
+  .option-item{display:flex; align-items:center; gap:14px; padding:14px 0; border-top:1px solid #29221E; color:var(--ash); font-size:0.98rem;}
+  .option-item svg{width:18px; height:18px; color:var(--gold); flex-shrink:0;}
+
+  .photo-row{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; position:relative; z-index:2;}
+  .photo-row .svc-photo{aspect-ratio:4/3;}
+
+  .highlight-block{
+    border-left:2px solid var(--flame); padding:6px 0 6px 28px; margin-top:50px;
+    position:relative; z-index:2;
+  }
+  .highlight-block p{color:var(--ash); font-size:1.05rem; line-height:1.6;}
+
+  .sfx-callout{
+    margin-top:50px; border:1px solid #2A231F; padding:32px; display:flex; align-items:center;
+    justify-content:space-between; gap:24px; flex-wrap:wrap; position:relative; z-index:2;
+  }
+  .sfx-callout p{color:var(--ash); max-width:560px; font-size:0.98rem;}
+  .sfx-callout p strong{color:var(--bone);}
+
+  @media (max-width:860px){
+    .options-grid{grid-template-columns:1fr;}
+    .photo-row{grid-template-columns:1fr 1fr;}
+    .about-grid{grid-template-columns:1fr;}
+  }
+</style>
+  </Fragment>
+<main id="top">
+
+  <!-- SERVICE HERO -->
+  <section class="svc-hero">
+    <video class="svc-hero-video" autoplay muted loop playsinline aria-label="Flux Entertainment fire show performance footage">
+      <source src="https://videos.fluxentertainment.com.au/fire2-hero.mp4" type="video/mp4">
+    </video>
+    <div class="svc-hero-overlay"></div>
+    <div class="mark-bg" style="top:-150px; right:-200px; opacity:0.3; z-index:1;"></div>
+    <div class="wrap" style="position:relative; z-index:2;">
+      <div class="svc-breadcrumb"><a href="/">Home</a> / <a href="/#services">Entertainment</a> / Fire Shows &amp; Acts</div>
+      <span class="mono eyebrow">Entertainment</span>
+      <h1 style="margin-top:18px;">Fire Shows &amp; Acts</h1>
+      <p class="hero-sub" style="margin-top:22px;">Fire shows are where it all started for Flux — high-impact, well-choreographed performances built around a diverse range of props and fire arts disciplines.</p>
+      <div class="hero-actions">
+        <a href="/contact" class="btn-primary">Book Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="about" style="padding-top:70px; padding-bottom:50px;">
+    <div class="mark-bg" style="top:10%; left:-350px; opacity:0.25;"></div>
+    <div class="wrap about-grid">
+      <div class="about-copy">
+        <p>Fire shows are where it all started for Flux. With an incredibly wide variety and diverse range of props and performance aspects, our fire performances are very high-impact, well-choreographed shows.</p>
+        <p>From engaging solo fire performances to large multi-person fire shows, Flux has access to a pool of talented multi-prop fire performers utilising a varying range of fire arts — from technical object manipulation to fire eaters and breathers, and explosive fire effect additions to shows.</p>
+        <p>We pride ourselves on delivering high-quality fire shows — every Flux fire performer has years of experience across multi-disciplinary fire arts and is highly regarded nationally, guaranteed to provide entertainment to remember.</p>
+        <a href="/contact" class="btn-ghost" style="display:inline-block; margin-top:10px;">Enquire About This Show</a>
+      </div>
+      <div class="svc-photo" style="overflow:hidden;">
+        <video autoplay muted loop playsinline aria-label="Flux Entertainment fire performer close-up" style="width:100%; height:100%; object-fit:cover;">
+          <source src="https://videos.fluxentertainment.com.au/fire-hero-original.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVAILABLE OPTIONS -->
+  <section class="provide" style="padding-top:60px; background:
+      linear-gradient(to bottom, rgba(10,9,8,0.6) 0%, rgba(10,9,8,0.92) 70%, var(--void) 100%),
+      url('/images/7252b40ff4f79832.jpg');
+      background-size:cover; background-position:center; background-repeat:no-repeat;">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="mono eyebrow">What's Included</span>
+        <h2 style="margin-top:18px;">Available Options</h2>
+      </div>
+      <div class="options-grid">
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Solo feature fire shows</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Duo feature fire shows</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Large group feature fire shows</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Large fire effects additives</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Fire eaters &amp; breathers</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Unique fire props &amp; effects</div>
+        <div class="option-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Can be performed indoors or outdoors</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO ROW -->
+  <section class="services" style="padding-top:70px; padding-bottom:70px; background:
+      linear-gradient(to bottom, rgba(10,9,8,0.55) 0%, rgba(23,19,16,0.9) 60%, var(--char) 100%),
+      url('/images/a9f4ba84f2a13936.jpg');
+      background-size:cover; background-position:center; background-repeat:no-repeat;">
+    <div class="wrap">
+      <div class="photo-row" style="margin-bottom:20px;">
+        <div class="svc-photo" style="overflow:hidden;"><img src="/images/005ca8d4c4711a58.jpg" alt="Flux Entertainment fire performer with flame sparks" style="width:100%; height:100%; object-fit:cover;"></div>
+        <div class="svc-photo" style="overflow:hidden;"><img src="/images/1e86b4fd135dff92.jpg" alt="Flux Entertainment fire breather on stage" style="width:100%; height:100%; object-fit:cover;"></div>
+        <div class="svc-photo" style="overflow:hidden;"><img src="/images/f2c51c967906dfd0.jpg" alt="Flux Entertainment fire dance performer with flaming fans" style="width:100%; height:100%; object-fit:cover;"></div>
+      </div>
+      <div class="photo-row">
+        <div class="svc-photo" style="overflow:hidden;"><img src="/images/008d7d6d31495cf0.jpg" alt="Flux Entertainment performer inside a ring of fire" style="width:100%; height:100%; object-fit:cover;"></div>
+        <div class="svc-photo" style="overflow:hidden;"><img src="/images/098b87f5df281691.jpg" alt="Flux Entertainment fire fan performer at a corporate event" style="width:100%; height:100%; object-fit:cover;"></div>
+        <div class="svc-photo" style="overflow:hidden;"><img src="/images/99dd38d4283d3b1e.jpg" alt="Flux Entertainment fire whip performer in an alleyway" style="width:100%; height:100%; object-fit:cover;"></div>
+      </div>
+
+      <div class="highlight-block">
+        <p>Our fire shows stand as the largest and most impactful in Australia, even without the use of pyrotechnics. Designed for maximum visual presence and high-energy performance, they deliver an impressive standalone experience. For events seeking even greater wow-factor or amplified scale, flame projectors and additional SFX elements can be seamlessly integrated to elevate the show to an even more powerful level.</p>
+      </div>
+
+      <div class="sfx-callout">
+        <p>Enhance your experience even further with <strong>Flux SFX</strong> — choreographed fireworks, flame effects, and stage effects that elevate any performance into something even more immersive.</p>
+        <a href="https://www.fluxsfx.com.au" target="_blank" rel="noopener" class="btn-ghost">Explore Flux SFX</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUSTED BY -->
+  <div class="trust" style="margin-top:0;">
+    <div class="trust-label mono">Who We've Worked With</div>
+    <div class="marquee-track">
+      __CLIENT_LOGOS__
+      __CLIENT_LOGOS__
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta" id="contact-cta" style="background:
+      linear-gradient(140deg, rgba(140,26,26,0.55), rgba(10,9,8,0.88) 65%),
+      url('/images/ecf7c812263068b0.jpg');
+      background-size:cover; background-position:center;">
+    <div class="mark-bg"></div>
+    <div class="wrap cta-inner">
+      <span class="mono" style="color:rgba(244,237,228,0.7);">Book Now</span>
+      <h2 style="margin-top:18px;">Let's Make It<br>Unforgettable.</h2>
+      <p>Tell us about your event and we'll get back to you with what's possible — Australia wide.</p>
+      <div class="cta-actions">
+        <a href="/contact" class="btn-primary">Enquire Now</a>
+        <a href="tel:+61473458788" class="btn-ghost">Call — 0473 458 788</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+</Layout>
