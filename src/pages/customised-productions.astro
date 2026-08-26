@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const title = "Customised Productions | Flux Entertainment";
-const description = "Fully bespoke productions from Flux Entertainment, combining fire, pyro, LED and more into one custom show — trusted by government, theme parks & major corporate clients.";
+const description = "Fully bespoke productions from Flux Entertainment, combining fire, pyro, LED and more into one custom show, trusted by government, theme parks & major corporate clients.";
 ---
 <Layout title={title} description={description}>
   <Fragment slot="page-style">
@@ -67,7 +67,7 @@ const description = "Fully bespoke productions from Flux Entertainment, combinin
       <div class="svc-breadcrumb"><a href="/">Home</a> / <a href="/#services">Entertainment</a> / Customised Productions</div>
       <span class="mono eyebrow">Entertainment</span>
       <h1 style="margin-top:18px;">Customised Productions</h1>
-      <p class="hero-sub" style="margin-top:22px;">A completely custom show, production, or unique prop — built from the ground up for your event or creative project.</p>
+      <p class="hero-sub" style="margin-top:22px;">A completely custom show, production, or unique prop, built from the ground up for your event or creative project.</p>
       <div class="hero-actions">
         <a href="/contact" class="btn-primary">Book Now</a>
       </div>
@@ -79,9 +79,9 @@ const description = "Fully bespoke productions from Flux Entertainment, combinin
     <div class="mark-bg" style="top:10%; left:-350px; opacity:0.25;"></div>
     <div class="wrap about-grid">
       <div class="about-copy">
-        <p>This is where everything Flux does comes together into one production. Rather than booking a single act, our biggest clients come to us with a brief — a brand, a story, a moment they need to land — and we build a show around it from the ground up, drawing on every discipline across the business: fire, pyrotechnics, LED, angle grinding, whip cracking, and more, combined into one cohesive production.</p>
-        <p>These are typically our largest and longest-running contracts — the kind booked by government bodies, theme parks, and major corporate clients who need something no off-the-shelf act can deliver. You can see some of that work on our <a href="/about" style="color:var(--gold); text-decoration:underline;">About page</a>, where we've listed the productions we're proudest of.</p>
-        <p>Every custom production starts with a conversation, not a package — audio and storyline design, custom-built pyrotechnic props, ground-based effects, and hybrid performances are all built specifically around your event, not pulled from a template. Occasionally that scope narrows right down to a single custom-built prop rather than a full production — if that's closer to what you need, we're happy to talk through it.</p>
+        <p>This is where everything Flux does comes together into one production. Rather than booking a single act, our biggest clients come to us with a brief, a brand, a story, a moment they need to land, and we build a show around it from the ground up, drawing on every discipline across the business: fire, pyrotechnics, LED, angle grinding, whip cracking, and more, combined into one cohesive production.</p>
+        <p>These are typically our largest and longest-running contracts, the kind booked by government bodies, theme parks, and major corporate clients who need something no off-the-shelf act can deliver. You can see some of that work on our <a href="/about" style="color:var(--gold); text-decoration:underline;">About page</a>, where we've listed the productions we're proudest of.</p>
+        <p>Every custom production starts with a conversation, not a package, audio and storyline design, custom-built pyrotechnic props, ground-based effects, and hybrid performances are all built specifically around your event, not pulled from a template. Occasionally that scope narrows right down to a single custom-built prop rather than a full production, if that's closer to what you need, we're happy to talk through it.</p>
         <a href="/contact" class="btn-ghost" style="display:inline-block; margin-top:10px;">Enquire About This Production</a>
       </div>
       <div class="svc-photo" style="overflow:hidden;">
@@ -118,12 +118,12 @@ const description = "Fully bespoke productions from Flux Entertainment, combinin
       <div class="section-head" style="margin-bottom:36px;">
         <span class="mono eyebrow">See Us In Action</span>
         <h2 style="margin-top:18px;">The Full Show Reel</h2>
-        <p>Four minutes of Flux at full scale — fire, fireworks, and production design in front of the country's biggest crowds.</p>
+        <p>Four minutes of Flux at full scale, fire, fireworks, and production design in front of the country's biggest crowds.</p>
       </div>
       <div id="customShowreelBox" style="position:relative; width:100%; aspect-ratio:16/9; background:#000; border:1px solid #2A231F; overflow:hidden;">
-        <div id="customShowreelPlaceholder" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:var(--char-2);">
-          <span class="mono" style="color:var(--ash-dim);">Loading...</span>
-        </div>
+        <video id="customShowreelVideo" muted loop playsinline preload="none" aria-label="Flux Entertainment full show reel" style="width:100%; height:100%; object-fit:cover;">
+          <source src="https://videos.fluxentertainment.com.au/showreel.mp4" type="video/mp4">
+        </video>
       </div>
       <button id="customUnmuteBtn" class="btn-ghost" style="display:none; margin-top:18px;">Unmute</button>
     </div>
@@ -137,7 +137,7 @@ const description = "Fully bespoke productions from Flux Entertainment, combinin
       </div>
 
       <div class="sfx-callout">
-        <p>Enhance your experience even further with <strong>Flux SFX</strong> — choreographed fireworks, flame effects, and stage effects that elevate any performance into something even more immersive.</p>
+        <p>Enhance your experience even further with <strong>Flux SFX</strong>: choreographed fireworks, flame effects, and stage effects that elevate any performance into something even more immersive.</p>
         <a href="https://www.fluxsfx.com.au" target="_blank" rel="noopener" class="btn-ghost">Explore Flux SFX</a>
       </div>
     </div>
@@ -201,10 +201,10 @@ const description = "Fully bespoke productions from Flux Entertainment, combinin
     <div class="wrap cta-inner">
       <span class="mono" style="color:rgba(244,237,228,0.7);">Book Now</span>
       <h2 style="margin-top:18px;">Let's Make It<br>Unforgettable.</h2>
-      <p>Tell us about your event and we'll get back to you with what's possible — Australia wide.</p>
+      <p>Tell us about your event and we'll get back to you with what's possible, Australia wide.</p>
       <div class="cta-actions">
         <a href="/contact" class="btn-primary">Enquire Now</a>
-        <a href="tel:+61473458788" class="btn-ghost">Call — 0473 458 788</a>
+        <a href="tel:+61473458788" class="btn-ghost">Call, 0473 458 788</a>
       </div>
     </div>
   </section>
@@ -214,37 +214,27 @@ const description = "Fully bespoke productions from Flux Entertainment, combinin
 <script>
   (function(){
     var box = document.getElementById('customShowreelBox');
-    var placeholder = document.getElementById('customShowreelPlaceholder');
+    var video = document.getElementById('customShowreelVideo');
     var unmuteBtn = document.getElementById('customUnmuteBtn');
-    if (!box) return;
-    var loaded = false;
-    var iframe = null;
+    if (!box || !video) return;
+    var started = false;
 
-    function loadPlayer(){
-      if (loaded) return;
-      loaded = true;
-      iframe = document.createElement('iframe');
-      iframe.id = 'customShowreelIframe';
-      iframe.src = 'https://www.youtube.com/embed/AOsidJRkQEI?autoplay=1&mute=1&loop=1&playlist=AOsidJRkQEI&enablejsapi=1&rel=0';
-      iframe.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; border:0;';
-      iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-      iframe.allowFullscreen = true;
-      placeholder.remove();
-      box.appendChild(iframe);
+    function startPlayback(){
+      if (started) return;
+      started = true;
+      video.play().catch(function(){});
       unmuteBtn.style.display = 'inline-block';
     }
 
     var observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting) loadPlayer();
+        if (entry.isIntersecting) startPlayback();
       });
     }, { threshold: 0.4 });
     observer.observe(box);
 
     unmuteBtn.addEventListener('click', function(){
-      if (!iframe) return;
-      iframe.contentWindow.postMessage(JSON.stringify({event:'command', func:'unMute', args:[]}), '*');
-      iframe.contentWindow.postMessage(JSON.stringify({event:'command', func:'setVolume', args:[100]}), '*');
+      video.muted = false;
       unmuteBtn.textContent = 'Sound On';
     });
   })();

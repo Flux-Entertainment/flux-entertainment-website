@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const title = "Flux Entertainment | Pyrotechnics & Fire Performers Australia";
-const description = "Australia's leading fire & pyrotechnics performance company. Firework-dancing, fire shows, angle grinding, LED, whip cracking & custom productions — nationally licensed, Australia wide.";
+const description = "Australia's leading fire & pyrotechnics performance company. Firework-dancing, fire shows, angle grinding, LED, whip cracking & custom productions, nationally licensed, Australia wide.";
 ---
 <Layout title={title} description={description}>
   <Fragment slot="page-style">
@@ -279,6 +279,9 @@ const description = "Australia's leading fire & pyrotechnics performance company
   @media (max-width:860px){
     .trust-label{position:static; display:block; padding:0 28px 14px;}
     .venue-row, .marquee-track{padding-left:28px;}
+    .marquee-track{gap:32px;}
+    .logo-box{width:100px; height:42px;}
+    .venue-row{gap:16px;}
   }
 
   /* ---------- SECTION SHARED ---------- */
@@ -462,10 +465,10 @@ const description = "Australia's leading fire & pyrotechnics performance company
     <div class="wrap hero-inner">
       <div class="eyebrow-row">
         <span class="line"></span>
-        <span class="mono eyebrow">Fire &amp; Pyrotechnic Performers — Australia Wide</span>
+        <span class="mono eyebrow">Fire &amp; Pyrotechnic Performers, Australia Wide</span>
       </div>
       <h1>Australia's Most<br><span class="accent">High-Impact</span> Shows</h1>
-      <p class="hero-sub">Handheld pyrotechnics, high-energy fire shows, and specialty acts — choreographed for stadiums, stages, and private events across the country. The only nationally licensed team performing at this scale.</p>
+      <p class="hero-sub">Handheld pyrotechnics, high-energy fire shows, and specialty acts, choreographed for stadiums, stages, and private events across the country. The only nationally licensed team performing at this scale.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn-primary">Book Your Event</a>
         <a href="#services" class="btn-ghost">See What We Do</a>
@@ -540,44 +543,63 @@ const description = "Australia's leading fire & pyrotechnics performance company
       <div class="section-head" style="margin-bottom:44px;">
         <span class="mono eyebrow">See Us In Action</span>
         <h2 style="margin-top:18px;">The Full Show Reel</h2>
-        <p>Four minutes of Flux at full scale — fire, fireworks, and production design in front of the country's biggest crowds.</p>
+        <p>Four minutes of Flux at full scale, fire, fireworks, and production design in front of the country's biggest crowds.</p>
       </div>
       <div id="showreelBox" style="position:relative; width:100%; aspect-ratio:16/9; background:#000; border:1px solid #2A231F; overflow:hidden;">
-        <a href="https://youtu.be/AOsidJRkQEI" target="_blank" rel="noopener" id="showreelThumb" style="position:absolute; inset:0; display:block;">
-          <img src="https://img.youtube.com/vi/AOsidJRkQEI/maxresdefault.jpg" alt="Flux Entertainment show reel" style="width:100%; height:100%; object-fit:cover; opacity:0.75;">
-          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-            <div style="width:88px; height:88px; border-radius:50%; background:rgba(214,40,40,0.92); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 40px -8px rgba(214,40,40,0.7); transition:transform 0.2s ease;">
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg>
-            </div>
+        <img id="showreelPoster" src="/images/1e0eb1fafb54c4db.jpg" alt="Flux Entertainment show reel" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.75; cursor:pointer;">
+        <div id="showreelPlayBtn" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+          <div style="width:88px; height:88px; border-radius:50%; background:rgba(214,40,40,0.92); display:flex; align-items:center; justify-content:center; box-shadow:0 10px 40px -8px rgba(214,40,40,0.7); transition:transform 0.2s ease;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--bone)"><path d="M8 5v14l11-7z"/></svg>
           </div>
-          <span class="mono" style="position:absolute; bottom:20px; left:24px; color:var(--bone); background:rgba(10,9,8,0.6); padding:8px 14px;">Hover to preview — click for full video</span>
-        </a>
+        </div>
+        <span id="showreelHint" class="mono" style="position:absolute; bottom:20px; left:24px; color:var(--bone); background:rgba(10,9,8,0.6); padding:8px 14px;">Hover to preview, click for full video</span>
+        <video id="showreelVideo" muted loop playsinline preload="none" aria-label="Flux Entertainment full show reel" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:none;">
+          <source src="https://videos.fluxentertainment.com.au/showreel.mp4" type="video/mp4">
+        </video>
       </div>
       <script>
-        // On the live site: hovering plays the reel inline with sound;
-        // moving away stops it. Click always opens the full video on YouTube.
+        // Desktop: hovering plays a muted preview inline. Click (any device): full video with sound and controls.
         (function(){
           var box = document.getElementById('showreelBox');
-          var thumb = document.getElementById('showreelThumb');
-          var iframe = null;
+          var poster = document.getElementById('showreelPoster');
+          var playBtn = document.getElementById('showreelPlayBtn');
+          var hint = document.getElementById('showreelHint');
+          var video = document.getElementById('showreelVideo');
           var isTouch = window.matchMedia('(hover: none)').matches;
-          if (isTouch) return; // touch devices keep click-to-YouTube only
-          box.addEventListener('mouseenter', function(){
-            if (iframe) return;
-            iframe = document.createElement('iframe');
-            iframe.src = 'https://www.youtube.com/embed/AOsidJRkQEI?autoplay=1&mute=0&controls=1&rel=0';
-            iframe.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; border:0;';
-            iframe.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-            iframe.allowFullscreen = true;
-            box.appendChild(iframe);
-            thumb.style.opacity = '0';
-            thumb.style.pointerEvents = 'none';
-          });
-          box.addEventListener('mouseleave', function(){
-            if (iframe) { box.removeChild(iframe); iframe = null; }
-            thumb.style.opacity = '1';
-            thumb.style.pointerEvents = 'auto';
-          });
+          var playing = false;
+
+          function startPreview(){
+            if (playing) return;
+            video.style.display = 'block';
+            video.play().catch(function(){});
+            poster.style.opacity = '0';
+          }
+          function stopPreview(){
+            if (playing) return;
+            video.pause();
+            video.currentTime = 0;
+            video.style.display = 'none';
+            poster.style.opacity = '0.75';
+          }
+          function playFull(){
+            playing = true;
+            video.loop = false;
+            video.muted = false;
+            video.controls = true;
+            video.style.display = 'block';
+            video.currentTime = 0;
+            video.play().catch(function(){});
+            poster.style.display = 'none';
+            playBtn.style.display = 'none';
+            hint.style.display = 'none';
+          }
+          if (isTouch) {
+            hint.textContent = 'Tap to play';
+          } else {
+            box.addEventListener('mouseenter', startPreview);
+            box.addEventListener('mouseleave', stopPreview);
+          }
+          box.addEventListener('click', playFull);
         })();
       </script>
     </div>
@@ -641,7 +663,7 @@ const description = "Australia's leading fire & pyrotechnics performance company
       <div class="section-head">
         <span class="mono eyebrow">Entertainment</span>
         <h2 style="margin-top:18px;">Ways We Deliver Impact</h2>
-        <p>Every act independently licensed, choreographed, and built to fit your event — from a single performer to a full production.</p>
+        <p>Every act independently licensed, choreographed, and built to fit your event, from a single performer to a full production.</p>
       </div>
       <div class="service-list">
         <a class="service-row" href="/pyrotechnics-performers">
@@ -685,8 +707,8 @@ const description = "Australia's leading fire & pyrotechnics performance company
       <div class="about-copy">
         <span class="mono eyebrow">Since 2020</span>
         <h2 style="margin-top:18px; margin-bottom:22px; font-size:clamp(2.2rem,4vw,3.2rem);">Pyrotechnics As A Performing Art</h2>
-        <p>Founded by Kris Thiesfield &amp; Madison Young, Flux was born from a shared passion for flow arts, fire, and object manipulation — evolving into Australia's number one fire and pyrotechnics performance company.</p>
-        <p>Being the only independently licensed fireworks performers in the nation, Flux delivers high-impact, dynamic, choreographed productions guaranteed to move an audience — trusted nationally by stadiums, broadcasters, and major brands.</p>
+        <p>Founded by Kris Thiesfield &amp; Madison Young, Flux was born from a shared passion for flow arts, fire, and object manipulation, evolving into Australia's number one fire and pyrotechnics performance company.</p>
+        <p>Being the only independently licensed fireworks performers in the nation, Flux delivers high-impact, dynamic, choreographed productions guaranteed to move an audience, trusted nationally by stadiums, broadcasters, and major brands.</p>
         <a href="/about" class="btn-ghost" style="display:inline-block; margin-top:10px;">Read Our Story</a>
         <div class="about-stats">
           <div class="stat"><div class="num">7</div><div class="lbl">States Serviced</div></div>
@@ -724,7 +746,7 @@ const description = "Australia's leading fire & pyrotechnics performance company
           <div class="who">SE Melbourne Phoenix</div>
         </div>
         <div class="test-card">
-          <p>"Documentation is of the highest standard — and truly world class."</p>
+          <p>"Documentation is of the highest standard, and truly world class."</p>
           <div class="who">Queensland Cricket</div>
         </div>
       </div>
@@ -737,13 +759,13 @@ const description = "Australia's leading fire & pyrotechnics performance company
     <div class="wrap cta-inner">
       <span class="mono" style="color:rgba(244,237,228,0.7);">Book Now</span>
       <h2 style="margin-top:18px;">Let's Make It<br>Unforgettable.</h2>
-      <p>Tell us about your event and we'll get back to you with what's possible — Australia wide.</p>
+      <p>Tell us about your event and we'll get back to you with what's possible, Australia wide.</p>
       <div class="cta-actions">
         <a href="mailto:info@fluxentertainment.com.au" class="btn-primary">Enquire Now</a>
-        <a href="tel:+61473458788" class="btn-ghost">Call — 0473 458 788</a>
+        <a href="tel:+61473458788" class="btn-ghost">Call, 0473 458 788</a>
       </div>
       <div class="contact-strip">
-        <span>Based in QLD — Servicing All of Australia</span>
+        <span>Based in QLD, Servicing All of Australia</span>
         <a href="mailto:info@fluxentertainment.com.au">info@fluxentertainment.com.au</a>
       </div>
     </div>

@@ -15,6 +15,7 @@ const { title, description } = Astro.props;
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.26/dist/lenis.css">
 <style is:global>
   :root{
     --void:#0A0908;
@@ -289,6 +290,9 @@ const { title, description } = Astro.props;
   @media (max-width:860px){
     .trust-label{position:static; display:block; padding:0 28px 14px;}
     .venue-row, .marquee-track{padding-left:28px;}
+    .marquee-track{gap:32px;}
+    .logo-box{width:100px; height:42px;}
+    .venue-row{gap:16px;}
   }
 
   /* ---------- SECTION SHARED ---------- */
@@ -457,6 +461,12 @@ const { title, description } = Astro.props;
     .service-desc{display:none;}
     section{padding:80px 0;}
   }
+  /* scroll-reveal */
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity 0.8s ease, transform 0.8s ease;}
+  .reveal.revealed{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
 </style>
   <slot name="page-style" />
 </head>
@@ -494,7 +504,7 @@ const { title, description } = Astro.props;
 <div class="sister-band">
   <a href="https://www.fluxsfx.com.au" target="_blank" rel="noopener">
     <img class="sfx-logo" src="/images/a296d7dd2c0e4753.png" alt="Flux SFX">
-    <span class="sister-copy">Need fireworks or special effects too? <strong>Flux SFX</strong>, our sister company, delivers that side of the show — visit fluxsfx.com.au</span>
+    <span class="sister-copy">Need fireworks or special effects too? <strong>Flux SFX</strong>, our sister company, delivers that side of the show, visit fluxsfx.com.au</span>
   </a>
 </div>
 
@@ -503,7 +513,7 @@ const { title, description } = Astro.props;
     <div class="footer-top">
       <div>
         <img class="footer-logo" src="/images/0dd428d998516428.png" alt="Flux Entertainment">
-        <p class="footer-tag">Australia's leading fire &amp; pyrotechnics performance company. Professional, safe, unforgettable — every time.</p>
+        <p class="footer-tag">Australia's leading fire &amp; pyrotechnics performance company. Professional, safe, unforgettable, every time.</p>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
@@ -576,6 +586,33 @@ const { title, description } = Astro.props;
       hero.appendChild(e);
     }
   }
+</script>
+
+<script src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+  // Smooth scroll (skipped entirely if the visitor prefers reduced motion)
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.Lenis) {
+    new Lenis({ autoRaf: true, anchors: true });
+  }
+
+  // Auto-reveal content as it scrolls into view (skips anything in the first-viewport hero)
+  (function(){
+    var selectors = '.section-head, .svc-photo, .option-item, .highlight-block, .sfx-callout, .service-row, .video-card, .event-item, .license-item, .form-field, .testimonial';
+    var targets = document.querySelectorAll(selectors);
+    targets.forEach(function(el){
+      if (el.closest('.hero, .svc-hero')) return; // don't hide above-the-fold content
+      el.classList.add('reveal');
+    });
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  })();
 </script>
 </body>
 </html>

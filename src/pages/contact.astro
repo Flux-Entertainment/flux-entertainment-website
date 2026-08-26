@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const title = "Contact & Enquiries | Flux Entertainment";
-const description = "Get in touch with Flux Entertainment to book fire, pyrotechnics, LED, or custom production performers for your next event — Australia wide.";
+const description = "Get in touch with Flux Entertainment to book fire, pyrotechnics, LED, or custom production performers for your next event, Australia wide.";
 ---
 <Layout title={title} description={description}>
   <Fragment slot="page-style">
@@ -87,7 +87,7 @@ const description = "Get in touch with Flux Entertainment to book fire, pyrotech
     <div class="wrap" style="position:relative; z-index:2;">
       <span class="mono eyebrow">Book Now</span>
       <h1 style="margin-top:18px;">Let's Talk About<br>Your Event.</h1>
-      <p class="hero-sub" style="margin-top:20px;">Fill in as much detail as you can and we'll come back to you with what's possible — Australia wide.</p>
+      <p class="hero-sub" style="margin-top:20px;">Fill in as much detail as you can and we'll come back to you with what's possible, Australia wide.</p>
     </div>
   </section>
 
@@ -106,7 +106,7 @@ const description = "Get in touch with Flux Entertainment to book fire, pyrotech
         </div>
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><span class="info-label">Based In</span><span>Queensland — servicing all of Australia</span></div>
+          <div><span class="info-label">Based In</span><span>Queensland, servicing all of Australia</span></div>
         </div>
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -259,15 +259,15 @@ const description = "Get in touch with Flux Entertainment to book fire, pyrotech
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
-        status.textContent = "Thanks — your enquiry's been sent. We'll be in touch soon.";
+        status.textContent = "Thanks, your enquiry's been sent. We'll be in touch soon.";
         status.classList.add('success');
         form.reset();
       } else {
-        status.textContent = "Something went wrong — please try again or email us directly.";
+        status.textContent = "Something went wrong, please try again or email us directly.";
         status.classList.add('error');
       }
     } catch (err) {
-      status.textContent = "Something went wrong — please try again or email us directly.";
+      status.textContent = "Something went wrong, please try again or email us directly.";
       status.classList.add('error');
     }
     btn.disabled = false;
