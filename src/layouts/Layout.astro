@@ -12,6 +12,7 @@ const { title, description } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={new URL(Astro.url.pathname, 'https://www.fluxentertainment.com.au').href} />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -290,9 +291,9 @@ const { title, description } = Astro.props;
   @media (max-width:860px){
     .trust-label{position:static; display:block; padding:0 28px 14px;}
     .venue-row, .marquee-track{padding-left:28px;}
-    .marquee-track{gap:32px;}
-    .logo-box{width:100px; height:42px;}
-    .venue-row{gap:16px;}
+    .marquee-track{gap:18px;}
+    .logo-box{width:78px; height:34px;}
+    .venue-row{gap:10px;}
   }
 
   /* ---------- SECTION SHARED ---------- */
@@ -455,6 +456,14 @@ const { title, description } = Astro.props;
     }
     nav.open{right:0;}
     .nav-toggle{display:block; z-index:60; background:none; border:none; color:var(--bone); font-size:1.6rem;}
+    .nav-backdrop{
+      position:fixed; inset:0; z-index:55;
+      background:rgba(10,9,8,0.85);
+      opacity:0; visibility:hidden;
+      transition:opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .nav-backdrop.open{opacity:1; visibility:visible;}
+    nav{z-index:56;}
     .about-grid{grid-template-columns:1fr;}
     .test-grid{grid-template-columns:1fr;}
     .service-row{grid-template-columns:1fr 26px; }
@@ -475,6 +484,7 @@ const { title, description } = Astro.props;
   <div class="wrap">
     <a href="#top"><img class="logo-mark" src="/images/0dd428d998516428.png" alt="Flux Entertainment"></a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="nav-backdrop" id="navBackdrop"></div>
     <nav id="siteNav">
       <div class="has-dropdown" id="entDropdown">
         <span class="dropdown-trigger">
@@ -548,10 +558,19 @@ const { title, description } = Astro.props;
 <script>
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('siteNav');
-  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  const navBackdrop = document.getElementById('navBackdrop');
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('open');
+    navBackdrop.classList.toggle('open');
+  });
+  navBackdrop.addEventListener('click', () => {
+    nav.classList.remove('open');
+    navBackdrop.classList.remove('open');
+  });
   document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', (e) => {
     if (a.closest('.dropdown-trigger')) return; // handled separately below
     nav.classList.remove('open');
+    navBackdrop.classList.remove('open');
   }));
 
   // Mobile: tap "Entertainment" label to expand/collapse the dropdown instead of navigating
@@ -563,7 +582,10 @@ const { title, description } = Astro.props;
       entDropdown.classList.toggle('mobile-open');
     }
   });
-  entDropdown.querySelectorAll('.dropdown-menu a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+  entDropdown.querySelectorAll('.dropdown-menu a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    navBackdrop.classList.remove('open');
+  }));
 
 
   const header = document.getElementById('site-header');
